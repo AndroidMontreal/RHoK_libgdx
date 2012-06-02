@@ -85,7 +85,6 @@ public class WaterSupplyGame implements ApplicationListener {
 			case DOWN_LEFT:
 				pieceType = new PieceType(new Sprite(new Texture(
 						Gdx.files.internal("DownLeft.png"))));
-				//pieceType.addGate();
 				break;
 			case DOWN_RIGHT:
 				pieceType = new PieceType(new Sprite(new Texture(
@@ -113,7 +112,12 @@ public class WaterSupplyGame implements ApplicationListener {
 				break;
 
 			default:
+				pieceType = null;
 				break;
+			}
+			
+			if(pieceType!=null){
+				pipeTypes.add(pieceType);
 			}
 		}
 	}

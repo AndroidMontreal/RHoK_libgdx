@@ -6,7 +6,6 @@ import java.util.List;
 import com.androidmontreal.rhok.pieces.Direction;
 import com.androidmontreal.rhok.pieces.Pipe;
 import com.androidmontreal.rhok.pieces.Point;
-import com.androidmontreal.rhok.pieces.Pipe.Type;
 
 public class PipeFactory 
 {
@@ -22,7 +21,6 @@ public class PipeFactory
 	
 	public Pipe create(Point point)
 	{
-		// FIXME: Boris!
 		Pipe pipe = new Pipe(null,getRandomPipeType(), getRandomDirection());
 		
 		return pipe;
