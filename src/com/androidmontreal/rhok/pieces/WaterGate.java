@@ -7,7 +7,7 @@ public class WaterGate implements Gate {
 	Direction direction;
 	Double pressure;
 
-	public WaterGate(Piece parentPiece) {
+	public WaterGate( Piece parentPiece, Direction direction ) {
 		this.parentPiece = parentPiece;
 	}
 

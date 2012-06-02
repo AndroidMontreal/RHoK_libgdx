@@ -19,4 +19,7 @@ public interface Piece {
 	
 	double getWater();
 	void setWater(double volume);
+	
+	/** Request a volume, you get what's available... */
+	double pullWater( double volume ); 
 }
