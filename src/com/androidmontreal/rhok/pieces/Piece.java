@@ -10,9 +10,13 @@ public interface Piece {
 	
 	Point getPosition();
 	
+	// 
 	void tick( long timedelta );
 	boolean isTicked();
 	void resetTick();
 	
 	Sprite getCurrentSprite();
+	
+	double getWater();
+	void setWater(double volume);
 }

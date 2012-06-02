@@ -1,8 +1,5 @@
 package com.androidmontreal.rhok.flow;
 
-import java.util.List;
-import java.util.ArrayList;
-
 import com.androidmontreal.rhok.board.Board;
 import com.androidmontreal.rhok.pieces.Gate;
 import com.androidmontreal.rhok.pieces.Piece;
@@ -10,7 +7,6 @@ import com.androidmontreal.rhok.pieces.Piece;
 public class FlowManager 
 {
 	private Board board;
-	private List<Piece> piecesToProcess = new ArrayList<Piece>();
 	
 	public FlowManager(Board board)
 	{
@@ -26,33 +22,40 @@ public class FlowManager
 		}
 		
 		Piece currentPiece = firstPiece;
-		this.piecesToProcess.add(currentPiece);
 		
-		currentPiece = this.piecesToProcess.iterator().next();
-		while(currentPiece != null)
+		if(currentPiece != null)
 		{
-			this.processPiece(currentPiece);
-			currentPiece = this.piecesToProcess.iterator().next();
+			this.tickPiece(currentPiece, timeDelta);
 		}
 	}
 	
-	private void processPiece(Piece piece)
+	// Allows us to propagate data....?
+	private void tickPiece(Piece currentPiece, long timeDelta)
 	{
-		//..  
-		
-		
-		this.piecesToProcess
+		// Piece will have logic to get info and water from neighbors.
+		currentPiece.tick(timeDelta); // TODO: Split tick in pressure tick then water tick?
+			
+		Piece untickedChildPiece = findNextUnticked( currentPiece ); 
+		while( untickedChildPiece != null ) {
+			tickPiece(untickedChildPiece, timeDelta);
+			untickedChildPiece = findNextUnticked( currentPiece );
+		}
 	}
 	
-	private Piece getAdjacentPiece(Piece piece)
-	{
-		for (Gate gate : piece.getGates()) {
-			if(gate.getAttachedGate() != null)
-			{
-				return gate.getAttachedGate().getPiece();
+	// Unticked are due to be worked on...
+	private Piece findNextUnticked(Piece currentPiece) {
+		
+		for (Gate gate : currentPiece.getGates()) {
+			Gate attachedGate = gate.getAttachedGate();
+			if( attachedGate !=null ) {
+				Piece piece = attachedGate.getPiece();
+				if( ! piece.isTicked() ) {
+					return piece ;
+				}
 			}
 		}
+		
 		return null;
 	}
-	
+
 }
