@@ -12,29 +12,32 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class Pipe implements Piece {
 
-	List<Gate> gates;
-	Point position;
-	Boolean ticked;
+	private List<Gate> gates = new ArrayList<Gate>();
+	private Point position;
+	private Boolean ticked;
+	private Sprite sprite;
+	private double water = 0.0d;
+	
+	
 
-	public Pipe() {
+	public Pipe(Sprite sprite, int x, int y) {
+		this.position.x = x;
+		this.position.y = y;
+		this.sprite = sprite;
 	}
 
-	public Pipe(int x, int y) {
-		position.x = x;
-		position.y = y;
+	public void setGates(List<Gate> gates) {
+		this.gates = gates;
 	}
-
+	
 	@Override
 	public List<Gate> getGates() {
-		if (gates == null) {
-			return new ArrayList<Gate>();
-		}
 		return gates;
 	}
 
 	@Override
 	public Point getPosition() {
-		return null;
+		return this.position;
 	}
 
 	@Override
@@ -56,19 +59,21 @@ public class Pipe implements Piece {
 
 	@Override
 	public Sprite getCurrentSprite() {
-		return null;
+		return this.sprite;
+	}
+	
+
+	@Override
+	public double getWater()
+	{
+		return this.water;
 	}
 
 	@Override
-	public double getWater() {
-		// TODO Auto-generated method stub
-		return 0;
+	public void setWater(double volume)
+	{
+		this.water = volume;
 	}
 
-	@Override
-	public void setWater(double volume) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }
