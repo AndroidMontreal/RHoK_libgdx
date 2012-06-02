@@ -41,7 +41,7 @@ public class FlowManager
 		//..  
 		
 		
-		this.piecesToProcess
+		//this.piecesToProcess
 	}
 	
 	private Piece getAdjacentPiece(Piece piece)
