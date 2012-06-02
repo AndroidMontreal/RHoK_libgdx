@@ -1,5 +1,8 @@
 package com.androidmontreal.rhok.flow;
 
+import java.util.List;
+import java.util.ArrayList;
+
 import com.androidmontreal.rhok.board.Board;
 import com.androidmontreal.rhok.pieces.Gate;
 import com.androidmontreal.rhok.pieces.Piece;
@@ -7,6 +10,7 @@ import com.androidmontreal.rhok.pieces.Piece;
 public class FlowManager 
 {
 	private Board board;
+	private List<Piece> piecesToProcess = new ArrayList<Piece>();
 	
 	public FlowManager(Board board)
 	{
@@ -22,17 +26,22 @@ public class FlowManager
 		}
 		
 		Piece currentPiece = firstPiece;
+		this.piecesToProcess.add(currentPiece);
 		
+		currentPiece = this.piecesToProcess.iterator().next();
 		while(currentPiece != null)
 		{
 			this.processPiece(currentPiece);
-			currentPiece = this.getAdjacentPiece(currentPiece);
+			currentPiece = this.piecesToProcess.iterator().next();
 		}
 	}
 	
 	private void processPiece(Piece piece)
 	{
+		//..  
 		
+		
+		this.piecesToProcess
 	}
 	
 	private Piece getAdjacentPiece(Piece piece)
