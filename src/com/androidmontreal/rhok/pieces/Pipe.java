@@ -6,8 +6,8 @@ import java.util.List;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 /**
- * This piece represents a pipe between twho other pieces (pipes, water source,
- * pumpe, no piece)
+ * This piece represents a pipe between two other pieces (pipes, water source,
+ * pump, no piece)
  */
 
 public class Pipe implements Piece {
