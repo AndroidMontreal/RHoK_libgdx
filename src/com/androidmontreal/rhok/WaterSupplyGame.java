@@ -26,10 +26,18 @@ public class WaterSupplyGame implements ApplicationListener {
 	public void create() {
 
 		initializePipeTypes();
+		
+		initializeSomePieces();
 
 		Art.load();
 		sprite = new Sprite(Art.texture);
 		batch = new SpriteBatch();
+	}
+
+	private void initializeSomePieces() {
+		for (int i = 0; i < 10; i++) {
+			
+		}
 	}
 
 	@Override
