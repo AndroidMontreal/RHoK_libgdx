@@ -53,5 +53,17 @@ public class WaterSource implements Piece {
 		return null;
 	}
 
+	@Override
+	public double getWater() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setWater(double volume) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 }
