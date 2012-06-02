@@ -27,7 +27,7 @@ public class Pipe implements Piece {
 	@Override
 	public List<Gate> getGates() {
 		if (gates == null) {
-			return new ArrayList<Gate>();
+			gates =  new ArrayList<Gate>();
 		}
 		return gates;
 	}
