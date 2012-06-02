@@ -2,6 +2,8 @@ package com.androidmontreal.rhok;
 
 import java.util.List;
 
+import com.androidmontreal.rhok.pieces.Direction;
+import com.androidmontreal.rhok.pieces.PipeGate;
 import com.androidmontreal.rhok.pieces.factory.PieceType;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -85,7 +87,6 @@ public class WaterSupplyGame implements ApplicationListener {
 			case DOWN_LEFT:
 				pieceType = new PieceType(new Sprite(new Texture(
 						Gdx.files.internal("DownLeft.png"))));
-				//pieceType.addGate();
 				break;
 			case DOWN_RIGHT:
 				pieceType = new PieceType(new Sprite(new Texture(
