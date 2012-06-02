@@ -1,9 +1,12 @@
 package com.androidmontreal.rhok;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.androidmontreal.rhok.pieces.Piece;
 import com.androidmontreal.rhok.pieces.Pipe;
 import com.androidmontreal.rhok.pieces.factory.PieceType;
+import com.androidmontreal.rhok.pieces.factory.PipeFactory;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
@@ -13,15 +16,15 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class WaterSupplyGame implements ApplicationListener {
 
-	private static final int TABLE_WIDTH = 5;
-	private static final int TABLE_HEIGHT = 6;
 	private SpriteBatch batch;
 	private Sprite sprite;
 
 	private double steps;
 
 	List<PieceType> pipeTypes;
+	List<Piece> pieces;
 
+	
 	@Override
 	public void create() {
 
@@ -35,16 +38,11 @@ public class WaterSupplyGame implements ApplicationListener {
 	}
 
 	private void initializeSomePieces() {
-					
-		Pipe[][] pipesTable = new Pipe[TABLE_WIDTH][TABLE_HEIGHT];
-			
-		for (int x = 0; x < TABLE_WIDTH; x++) {
-			
-			for (int y = 0; y < TABLE_HEIGHT; y++) {
-				pipesTable[x][y] = new Pipe(x,y);
-			} 		
+		pieces=new ArrayList<Piece>();
+		PipeFactory pipeFactory = PipeFactory.getInstance();
+		for (int i = 0; i < 10; i++) {
+			pieces.add(pipeFactory.createPipe());
 		}
-		
 	}
 
 	@Override

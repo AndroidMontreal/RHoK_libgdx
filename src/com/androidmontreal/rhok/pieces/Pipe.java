@@ -25,17 +25,17 @@ public class Pipe implements Piece {
 	private Gate gateB ;
 
 	private PipeType type;
-	
-	public PipeType getType() {
-		return type;
-	}
-
 	private Point position;
 	private Boolean ticked;
 	private Sprite sprite;
 	private double waterContent = 0.0d;
 
 
+	public Pipe(PipeType type, Point position){
+		this(null,type);
+		this.position = position;
+	}
+	
 	public Pipe(Sprite sprite, PipeType type) {
 		this.sprite = sprite;
 		this.type = type ;
@@ -139,6 +139,11 @@ public class Pipe implements Piece {
 	public void resetTick() {
 		this.ticked = false;
 	}
+	
+	public PipeType getType() {
+		return type;
+	}
+
 
 	@Override
 	public Sprite getCurrentSprite() {
