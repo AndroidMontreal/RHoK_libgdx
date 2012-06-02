@@ -14,6 +14,7 @@ public class Pipe implements Piece {
 
 	List<Gate> gates;
 	Point position;
+	Boolean ticked;
 
 	public Pipe() {
 	}
@@ -38,17 +39,19 @@ public class Pipe implements Piece {
 
 	@Override
 	public void tick(long timedelta) {
-
+		// TODO Auto-generated method stub
+		
+		this.ticked = true;
 	}
 
 	@Override
 	public boolean isTicked() {
-		return false;
+		return this.ticked;
 	}
 
 	@Override
 	public void resetTick() {
-
+		this.ticked = false;
 	}
 
 	@Override
