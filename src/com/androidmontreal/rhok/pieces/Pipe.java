@@ -3,6 +3,7 @@ package com.androidmontreal.rhok.pieces;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.androidmontreal.rhok.pieces.Pipe.Type;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 /**
@@ -11,27 +12,71 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
  */
 
 public class Pipe implements Piece {
+	enum Type { STRAIGHT, ELBOW } ;
+	
+	private static final double CAPACITY = 5 ;
+	
+	private Gate gateA ;
+	private Gate gateB ;
 
-	private List<Gate> gates = new ArrayList<Gate>();
+	private Type type;
+	
 	private Point position;
 	private Boolean ticked;
 	private Sprite sprite;
 	private double water = 0.0d;
-	
-	
 
-	public Pipe(Sprite sprite, Point position) {
-		this.position = position;
+	public Pipe(Sprite sprite, Type type, Direction direction ) {
 		this.sprite = sprite;
+		this.type = type ;
+		
+		if( this.type == Type.STRAIGHT ) {
+			switch( direction ) {
+				case UP :
+					gateA = new WaterGate(this, Direction.UP);
+					gateB = new WaterGate(this, Direction.DOWN);
+					break ;
+				case RIGHT :
+					gateA = new WaterGate(this, Direction.RIGHT);
+					gateB = new WaterGate(this, Direction.LEFT);
+					break ;
+				case DOWN :
+					gateA = new WaterGate(this, Direction.DOWN);
+					gateB = new WaterGate(this, Direction.UP);
+					break ;
+				case LEFT :
+					gateA = new WaterGate(this, Direction.LEFT);
+					gateB = new WaterGate(this, Direction.RIGHT);
+					break ;
+			}
+		} else if (this.type == Type.ELBOW) {
+			switch (direction) {
+			case UP:
+				gateA = new WaterGate(this, Direction.UP);
+				gateB = new WaterGate(this, Direction.RIGHT);
+				break;
+			case RIGHT:
+				gateA = new WaterGate(this, Direction.RIGHT);
+				gateB = new WaterGate(this, Direction.DOWN);
+				break;
+			case DOWN:
+				gateA = new WaterGate(this, Direction.DOWN);
+				gateB = new WaterGate(this, Direction.LEFT);
+				break;
+			case LEFT:
+				gateA = new WaterGate(this, Direction.LEFT);
+				gateB = new WaterGate(this, Direction.UP);
+				break;
+			}
+		}
+
 	}
 
-	public void setGates(List<Gate> gates) {
-		this.gates = gates;
-	}
-	
 	@Override
 	public List<Gate> getGates() {
-		return gates;
+		List<Gate> retVal = new ArrayList<Gate>();
+		retVal.add(gateA); retVal.add(gateB);
+		return retVal;
 	}
 
 	@Override
@@ -41,6 +86,7 @@ public class Pipe implements Piece {
 
 	@Override
 	public void tick(long timedelta) {
+		
 		// TODO Auto-generated method stub
 		
 		this.ticked = true;
@@ -72,6 +118,12 @@ public class Pipe implements Piece {
 	public void setWater(double volume)
 	{
 		this.water = volume;
+	}
+
+	@Override
+	public double pullWater(double volume) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 
