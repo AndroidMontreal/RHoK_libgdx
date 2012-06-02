@@ -12,6 +12,8 @@ public class WaterSource implements Piece {
 
 	private Gate sourceExit;
 	
+	private Point position = new Point(0,0);  // DEFAULT
+	
 	@Override
 	public List<Gate> getGates() {
 		if (sourceExit == null) {
@@ -24,8 +26,7 @@ public class WaterSource implements Piece {
 
 	@Override
 	public Point getPosition() {
-		// TODO Auto-generated method stub
-		return null;
+		return position;
 	}
 
 	@Override

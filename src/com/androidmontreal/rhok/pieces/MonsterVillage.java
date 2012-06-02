@@ -12,7 +12,7 @@ public class MonsterVillage implements Piece {
 
 	private Gate sourceEntry;
 	
-	private Point position = new Point(0,0);  // DEFAULT
+	private Point position;
 	
 	@Override
 	public List<Gate> getGates() {
