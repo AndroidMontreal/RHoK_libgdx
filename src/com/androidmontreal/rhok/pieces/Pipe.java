@@ -16,7 +16,9 @@ public class Pipe implements Piece {
 	}
 	
 	public enum PipeType{
-		TOP_LEFT, TOP_RIGHT, DOWN_RIGHT, DOWN_LEFT, HORIZONTAL, VERTICAL
+		TOP_LEFT, TOP_RIGHT, DOWN_RIGHT, DOWN_LEFT, HORIZONTAL, VERTICAL, BLANK;
+
+
 	}
 	
 	private static final double CAPACITY = 5 ;
@@ -64,6 +66,10 @@ public class Pipe implements Piece {
 		case VERTICAL:
 			gateA = new WaterGate(this, Direction.UP);
 			gateB = new WaterGate(this, Direction.DOWN);
+			break;
+		case BLANK:
+			gateA = null;
+			gateB = null;
 			break;
 		}
 
