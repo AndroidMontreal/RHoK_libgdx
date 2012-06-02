@@ -20,9 +20,8 @@ public class Pipe implements Piece {
 	
 	
 
-	public Pipe(Sprite sprite, int x, int y) {
-		this.position.x = x;
-		this.position.y = y;
+	public Pipe(Sprite sprite, Point position) {
+		this.position = position;
 		this.sprite = sprite;
 	}
 

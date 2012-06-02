@@ -1,4 +1,4 @@
-package com.androidmontreal.rhok.pieces;
+package com.androidmontreal.rhok.pieces.factory;
 
 import java.util.ArrayList;
 import java.util.List;
