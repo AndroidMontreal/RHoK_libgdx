@@ -3,7 +3,6 @@ package com.androidmontreal.rhok;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -11,14 +10,13 @@ public class WaterSupplyGame implements ApplicationListener {
 
 	private SpriteBatch batch ;
 	private Sprite sprite ;
-	private Texture texture;
 	
 	private double steps ;
 	
 	@Override
 	public void create() {
-		texture = new Texture(Gdx.files.internal("nh-01.png"));
-		sprite = new Sprite(texture);
+		Art.load();
+		sprite = new Sprite(Art.texture);
 		batch = new SpriteBatch();
 	}
 

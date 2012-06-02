@@ -11,6 +11,9 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 public class WaterSource implements Piece {
 
 	private Gate sourceExit;
+	private Boolean ticked;
+	
+	private Point position = new Point(0,0);  // DEFAULT
 	
 	@Override
 	public List<Gate> getGates() {
@@ -24,26 +27,24 @@ public class WaterSource implements Piece {
 
 	@Override
 	public Point getPosition() {
-		// TODO Auto-generated method stub
-		return null;
+		return position;
 	}
 
 	@Override
 	public void tick(long timedelta) {
 		// TODO Auto-generated method stub
 		
+		this.ticked = true;
 	}
 
 	@Override
 	public boolean isTicked() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.ticked;
 	}
 
 	@Override
 	public void resetTick() {
-		// TODO Auto-generated method stub
-		
+		this.ticked = false;
 	}
 
 	@Override
