@@ -39,6 +39,7 @@ public class Point {
 		{
 			return Direction.LEFT;
 		}
+		
 		return null;
 	}
 }

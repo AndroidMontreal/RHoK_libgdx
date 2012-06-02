@@ -3,6 +3,7 @@ package com.androidmontreal.rhok.board;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.androidmontreal.rhok.pieces.DirectionUtil;
 import com.androidmontreal.rhok.pieces.Piece;
 import com.androidmontreal.rhok.pieces.Direction;
 import com.androidmontreal.rhok.pieces.Gate;
@@ -41,12 +42,7 @@ public class Board {
 	
 	private static void attachPieces(Piece p1, Piece p2, Direction direction)
 	{
-//		for (Gate gate : p1.getGates()) {
-//			if(gate.getDirection() == direction)
-//			{
-//				gate.setAttachedGate(gate)
-//			}
-//		}
+		p1.getGates().get(direction).setAttachedGate(p2.getGates().get(DirectionUtil.getOpposite(direction)));
 	}
 	
 	public void setRootPiece(Piece piece)
