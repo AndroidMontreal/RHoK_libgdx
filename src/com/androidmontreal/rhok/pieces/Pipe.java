@@ -11,6 +11,10 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class Pipe implements Piece {
 	
+	public Pipe() {
+		
+	}
+	
 	public enum PipeType{
 		TOP_LEFT, TOP_RIGHT, DOWN_RIGHT, DOWN_LEFT, HORIZONTAL, VERTICAL
 	}
