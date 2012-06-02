@@ -45,7 +45,7 @@ public class FlowManager
 	// Unticked are due to be worked on...
 	private Piece findNextUnticked(Piece currentPiece) {
 		
-		for (Gate gate : currentPiece.getGates()) {
+		for (Gate gate : currentPiece.getGates().values()) {
 			Gate attachedGate = gate.getAttachedGate();
 			if( attachedGate !=null ) {
 				Piece piece = attachedGate.getPiece();
