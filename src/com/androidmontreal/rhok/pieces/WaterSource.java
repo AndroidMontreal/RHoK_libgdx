@@ -1,6 +1,7 @@
 package com.androidmontreal.rhok.pieces;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -16,12 +17,12 @@ public class WaterSource implements Piece {
 	private Point position = new Point(0,0);  // DEFAULT
 	
 	@Override
-	public List<Gate> getGates() {
+	public Hashtable<Direction, Gate> getGates() {
 		if (sourceExit == null) {
 			return null;
 		}
-		ArrayList<Gate> gates = new ArrayList<Gate>();
-		gates.add(sourceExit);
+		Hashtable<Direction, Gate> gates = new Hashtable<Direction, Gate>();
+		gates.put(sourceExit.getDirection(), sourceExit);
 		return gates;
 	}
 
@@ -70,11 +71,4 @@ public class WaterSource implements Piece {
 		return volume; // for now, the water source is unlimited
 	}
 
-	@Override
-	public double pullWater(double volume) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	
 }

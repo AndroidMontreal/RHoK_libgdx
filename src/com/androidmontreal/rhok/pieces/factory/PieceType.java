@@ -8,6 +8,10 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class PieceType 
 {
+	public enum PipeType{
+		TOP_LEFT, TOP_RIGHT, DOWN_RIGHT, DOWN_LEFT, HORIZONTAL, VERTICAL
+	}
+	
 	private Sprite sprite;
 	private List<Gate> gates = new ArrayList<Gate>();
 	
