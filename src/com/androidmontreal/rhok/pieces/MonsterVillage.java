@@ -11,7 +11,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 public class MonsterVillage implements Piece {
 
 	private Gate sourceEntry;
-	
+	private Boolean ticked = false;
 	private Point position;
 	
 	@Override
@@ -33,18 +33,17 @@ public class MonsterVillage implements Piece {
 	public void tick(long timedelta) {
 		// TODO Auto-generated method stub
 		
+		this.ticked = true;
 	}
 
 	@Override
 	public boolean isTicked() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.ticked;
 	}
 
 	@Override
 	public void resetTick() {
-		// TODO Auto-generated method stub
-		
+		this.ticked = false;
 	}
 
 	@Override
