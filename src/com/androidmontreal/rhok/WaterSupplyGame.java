@@ -35,12 +35,14 @@ public class WaterSupplyGame implements ApplicationListener {
 	
 	@Override
 	public void create() {
+		
+		pipesTable = new Pipe[TABLE_WIDTH][TABLE_HEIGHT];
 
 		initializePipeTypes();
 		
 		initializeSomePieces();
 		
-		pipesTable = new Pipe[TABLE_WIDTH][TABLE_HEIGHT];
+	
 		
 		batch = new SpriteBatch();
 	}
@@ -78,7 +80,7 @@ public class WaterSupplyGame implements ApplicationListener {
 				
 				Pipe p = pipesTable[x][y];
 				
-				Sprite s = pipeSprites.get(p);			
+				Sprite s = pipeSprites.get(p.getType());		
 				int displayX = (x + 1) * spacing;
 				int displayY = (y + 1) * spacing;
 				

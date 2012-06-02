@@ -10,15 +10,9 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
  */
 
 public class Pipe implements Piece {
-	
-	public Pipe() {
 		
-	}
-	
 	public enum PipeType{
 		TOP_LEFT, TOP_RIGHT, DOWN_RIGHT, DOWN_LEFT, HORIZONTAL, VERTICAL, BLANK;
-
-
 	}
 	
 	private static final double CAPACITY = 5 ;
@@ -28,18 +22,19 @@ public class Pipe implements Piece {
 
 	private PipeType type;
 	private Point position;
-	private Boolean ticked;
-	private Sprite sprite;
+	private Boolean ticked;	
 	private double waterContent = 0.0d;
+
+	private Sprite sprite;
 
 
 	public Pipe(PipeType type, Point position){
-		this(null,type);
+		this.type = type;
 		this.position = position;
 	}
 	
 	public Pipe(Sprite sprite, PipeType type) {
-		this.sprite = sprite;
+	
 		this.type = type ;
 
 		switch (type) {
