@@ -62,5 +62,10 @@ public class MonsterVillage implements Piece {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public double pullWater(double volume) {
+		return 0; // never pulls water from the monster village!
+	}
 
 }
