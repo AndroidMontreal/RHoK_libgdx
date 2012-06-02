@@ -16,11 +16,10 @@ public class MonsterVillage implements Piece {
 	
 	@Override
 	public List<Gate> getGates() {
-		if (sourceEntry == null) {
-			return null;
-		}
 		ArrayList<Gate> gates = new ArrayList<Gate>();
-		gates.add(sourceEntry);
+		if (sourceEntry != null) {
+			gates.add(sourceEntry);
+		}
 		return gates;
 	}
 
