@@ -1,10 +1,7 @@
 package com.androidmontreal.rhok.pieces;
 
-import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.List;
 
-import com.androidmontreal.rhok.pieces.Pipe.Type;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 /**
@@ -13,62 +10,53 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
  */
 
 public class Pipe implements Piece {
-	enum Type { STRAIGHT, ELBOW } ;
+	
+	public enum PipeType{
+		TOP_LEFT, TOP_RIGHT, DOWN_RIGHT, DOWN_LEFT, HORIZONTAL, VERTICAL
+	}
 	
 	private static final double CAPACITY = 5 ;
 	
 	private Gate gateA ;
 	private Gate gateB ;
 
-	private Type type;
+	private PipeType type;
 	
 	private Point position;
 	private Boolean ticked;
 	private Sprite sprite;
-	private double water = 0.0d;
+	private double waterContent = 0.0d;
 
-	public Pipe(Sprite sprite, Type type, Direction direction ) {
+
+	public Pipe(Sprite sprite, PipeType type) {
 		this.sprite = sprite;
 		this.type = type ;
-		
-		if( this.type == Type.STRAIGHT ) {
-			switch( direction ) {
-				case UP :
-					gateA = new WaterGate(this, Direction.UP);
-					gateB = new WaterGate(this, Direction.DOWN);
-					break ;
-				case RIGHT :
-					gateA = new WaterGate(this, Direction.RIGHT);
-					gateB = new WaterGate(this, Direction.LEFT);
-					break ;
-				case DOWN :
-					gateA = new WaterGate(this, Direction.DOWN);
-					gateB = new WaterGate(this, Direction.UP);
-					break ;
-				case LEFT :
-					gateA = new WaterGate(this, Direction.LEFT);
-					gateB = new WaterGate(this, Direction.RIGHT);
-					break ;
-			}
-		} else if (this.type == Type.ELBOW) {
-			switch (direction) {
-			case UP:
-				gateA = new WaterGate(this, Direction.UP);
-				gateB = new WaterGate(this, Direction.RIGHT);
-				break;
-			case RIGHT:
-				gateA = new WaterGate(this, Direction.RIGHT);
-				gateB = new WaterGate(this, Direction.DOWN);
-				break;
-			case DOWN:
-				gateA = new WaterGate(this, Direction.DOWN);
-				gateB = new WaterGate(this, Direction.LEFT);
-				break;
-			case LEFT:
-				gateA = new WaterGate(this, Direction.LEFT);
-				gateB = new WaterGate(this, Direction.UP);
-				break;
-			}
+
+		switch (type) {
+		case TOP_RIGHT:
+			gateA = new WaterGate(this, Direction.UP);
+			gateB = new WaterGate(this, Direction.RIGHT);
+			break;
+		case DOWN_RIGHT:
+			gateA = new WaterGate(this, Direction.DOWN);
+			gateB = new WaterGate(this, Direction.RIGHT);
+			break;
+		case DOWN_LEFT:
+			gateA = new WaterGate(this, Direction.DOWN);
+			gateB = new WaterGate(this, Direction.LEFT);
+			break;
+		case TOP_LEFT:
+			gateA = new WaterGate(this, Direction.UP);
+			gateB = new WaterGate(this, Direction.LEFT);
+			break;
+		case HORIZONTAL:
+			gateA = new WaterGate(this, Direction.RIGHT);
+			gateB = new WaterGate(this, Direction.LEFT);
+			break;
+		case VERTICAL:
+			gateA = new WaterGate(this, Direction.UP);
+			gateB = new WaterGate(this, Direction.DOWN);
+			break;
 		}
 
 	}
@@ -89,12 +77,42 @@ public class Pipe implements Piece {
 
 	@Override
 	public void tick(long timedelta) {
+		Piece aPiece = gateA.getAttachedGate() != null ? gateA.getAttachedGate().getPiece() : null ;
+		Piece bPiece = gateB.getAttachedGate() != null ? gateB.getAttachedGate().getPiece() : null ;
 		
-		// TODO Auto-generated method stub
+		// Equalize pressure
+		if( aPiece != null && aPiece.isTicked() ) {
+			double pressure = gateA.getAttachedGate().getPressure();
+			gateB.setPressure( pressure );
+			double request = calculateRequest(pressure);
+			if( pressure > 0 ) {
+				waterContent += aPiece.pullWater(pressure);
+			} else {
+				waterContent += bPiece.pullWater(pressure);
+			}
+		}
+		
+		if( bPiece != null && bPiece.isTicked() ) {
+			double pressure = gateB.getAttachedGate().getPressure();
+			gateA.setPressure( gateB.getAttachedGate().getPressure() );
+
+		}
 		
 		this.ticked = true;
 	}
 
+	double calculateRequest( double pressure ) {
+		double abs = Math.abs(pressure);
+		
+		double waterRequest = 0 ;
+		if( pressure > ( CAPACITY - waterContent ) ) {
+			waterRequest = CAPACITY - waterContent ;
+		} else {
+			waterRequest = pressure; 
+		}
+		return waterRequest ;
+	}
+	
 	@Override
 	public boolean isTicked() {
 		return this.ticked;
@@ -114,19 +132,27 @@ public class Pipe implements Piece {
 	@Override
 	public double getWater()
 	{
-		return this.water;
+		return this.waterContent;
 	}
 
 	@Override
 	public void setWater(double volume)
 	{
-		this.water = volume;
+		this.waterContent = volume;
 	}
 
 	@Override
 	public double pullWater(double volume) {
-		// TODO Auto-generated method stub
-		return 0;
+		double retVal = 0 ;
+		if( volume > waterContent ) {
+			retVal = waterContent ;
+			waterContent = 0 ;
+		} else {
+			retVal = volume ;
+			waterContent -= volume ;
+		}
+		
+		return retVal ;
 	}
 
 
