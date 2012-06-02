@@ -1,10 +1,7 @@
 package com.androidmontreal.rhok.pieces;
 
-import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.List;
 
-import com.androidmontreal.rhok.pieces.Pipe.Type;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 /**
@@ -13,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
  */
 
 public class Pipe implements Piece {
-	enum Type { STRAIGHT, ELBOW } ;
+	public enum Type { STRAIGHT, ELBOW } ;
 	
 	private static final double CAPACITY = 5 ;
 	
@@ -25,7 +22,8 @@ public class Pipe implements Piece {
 	private Point position;
 	private Boolean ticked;
 	private Sprite sprite;
-	private double water = 0.0d;
+	private double waterContent = 0.0d;
+
 
 	public Pipe(Sprite sprite, Type type, Direction direction ) {
 		this.sprite = sprite;
@@ -89,12 +87,42 @@ public class Pipe implements Piece {
 
 	@Override
 	public void tick(long timedelta) {
+		Piece aPiece = gateA.getAttachedGate() != null ? gateA.getAttachedGate().getPiece() : null ;
+		Piece bPiece = gateB.getAttachedGate() != null ? gateB.getAttachedGate().getPiece() : null ;
 		
-		// TODO Auto-generated method stub
+		// Equalize pressure
+		if( aPiece != null && aPiece.isTicked() ) {
+			double pressure = gateA.getAttachedGate().getPressure();
+			gateB.setPressure( pressure );
+			double request = calculateRequest(pressure);
+			if( pressure > 0 ) {
+				waterContent += aPiece.pullWater(pressure);
+			} else {
+				
+			}
+		}
+		
+		if( bPiece != null && bPiece.isTicked() ) {
+			double pressure = gateB.getAttachedGate().getPressure();
+			gateA.setPressure( gateB.getAttachedGate().getPressure() );
+
+		}
 		
 		this.ticked = true;
 	}
 
+	double calculateRequest( double pressure ) {
+		double abs = Math.abs(pressure);
+		
+		double waterRequest = 0 ;
+		if( pressure > ( CAPACITY - waterContent ) ) {
+			waterRequest = CAPACITY - waterContent ;
+		} else {
+			waterRequest = pressure; 
+		}
+		return waterRequest ;
+	}
+	
 	@Override
 	public boolean isTicked() {
 		return this.ticked;
@@ -114,19 +142,27 @@ public class Pipe implements Piece {
 	@Override
 	public double getWater()
 	{
-		return this.water;
+		return this.waterContent;
 	}
 
 	@Override
 	public void setWater(double volume)
 	{
-		this.water = volume;
+		this.waterContent = volume;
 	}
 
 	@Override
 	public double pullWater(double volume) {
-		// TODO Auto-generated method stub
-		return 0;
+		double retVal = 0 ;
+		if( volume > waterContent ) {
+			retVal = waterContent ;
+			waterContent = 0 ;
+		} else {
+			retVal = volume ;
+			waterContent -= volume ;
+		}
+		
+		return retVal ;
 	}
 
 
