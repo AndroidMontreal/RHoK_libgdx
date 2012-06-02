@@ -1,6 +1,7 @@
 package com.androidmontreal.rhok.pieces;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 import com.androidmontreal.rhok.pieces.Pipe.Type;
@@ -72,11 +73,13 @@ public class Pipe implements Piece {
 
 	}
 
+
 	@Override
-	public List<Gate> getGates() {
-		List<Gate> retVal = new ArrayList<Gate>();
-		retVal.add(gateA); retVal.add(gateB);
-		return retVal;
+	public Hashtable<Direction, Gate> getGates() {
+		Hashtable<Direction, Gate> table = new Hashtable<Direction, Gate>();
+		table.put(gateA.getDirection(), gateA);
+		table.put(gateB.getDirection(), gateB);
+		return table;
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package com.androidmontreal.rhok.pieces;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -13,14 +14,14 @@ public class MonsterVillage implements Piece {
 	private Gate sourceEntry;
 	private Boolean ticked = false;
 	private Point position;
-	
+
 	@Override
-	public List<Gate> getGates() {
-		ArrayList<Gate> gates = new ArrayList<Gate>();
+	public Hashtable<Direction, Gate> getGates() {
+		Hashtable<Direction, Gate> table = new Hashtable<Direction, Gate>();
 		if (sourceEntry != null) {
-			gates.add(sourceEntry);
+			table.put(sourceEntry.getDirection(), sourceEntry);
 		}
-		return gates;
+		return table;
 	}
 
 	@Override
