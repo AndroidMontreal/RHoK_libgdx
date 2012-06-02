@@ -1,25 +1,30 @@
 package com.androidmontreal.rhok.pieces;
 
-import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.List;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 /**
  * This piece represents the monster village where the water need to go.
  */
-public class MonsterVillage implements Piece {
+public class WaterExit implements Piece {
 
-	private Gate sourceEntry;
+	private double quantity = 0 ;
+	
+	private Gate gateA;
 	private Boolean ticked = false;
 	private Point position;
 
+	private Sprite sprite;
+
+	public WaterExit() {
+	} 
+	
 	@Override
 	public Hashtable<Direction, Gate> getGates() {
 		Hashtable<Direction, Gate> table = new Hashtable<Direction, Gate>();
-		if (sourceEntry != null) {
-			table.put(sourceEntry.getDirection(), sourceEntry);
+		if (gateA != null) {
+			table.put(gateA.getDirection(), gateA);
 		}
 		return table;
 	}
@@ -31,9 +36,26 @@ public class MonsterVillage implements Piece {
 
 	@Override
 	public void tick(long timedelta) {
-		// TODO Auto-generated method stub
+		Piece aPiece = gateA.getAttachedGate() != null ? gateA.getAttachedGate().getPiece() : null ;
 		
+		if( aPiece != null && aPiece.isTicked() ) {
+			double pressure = gateA.getAttachedGate().getPressure();
+			gateA.setPressure(pressure);
+			
+			double request = calculateRequest(pressure);
+			if( pressure > 0 ) {
+				quantity += aPiece.pullWater(request);
+			} 
+		}
+
 		this.ticked = true;
+	}
+
+	double calculateRequest( double pressure ) {
+		double absPressure = Math.abs(pressure);
+		
+		double waterRequest = absPressure; 
+		return waterRequest ;
 	}
 
 	@Override
@@ -48,20 +70,17 @@ public class MonsterVillage implements Piece {
 
 	@Override
 	public Sprite getCurrentSprite() {
-		// TODO Auto-generated method stub
-		return null;
+		return sprite;
 	}
 
 	@Override
 	public double getWater() {
-		// TODO Auto-generated method stub
-		return 0;
+		return quantity;
 	}
 
 	@Override
 	public void setWater(double volume) {
-		// TODO Auto-generated method stub
-		
+		this.quantity = volume ;
 	}
 	
 	@Override

@@ -22,6 +22,10 @@ public class Pipe implements Piece {
 
 	private PipeType type;
 	
+	public PipeType getType() {
+		return type;
+	}
+
 	private Point position;
 	private Boolean ticked;
 	private Sprite sprite;
@@ -83,32 +87,41 @@ public class Pipe implements Piece {
 		// Equalize pressure
 		if( aPiece != null && aPiece.isTicked() ) {
 			double pressure = gateA.getAttachedGate().getPressure();
+			gateA.setPressure(pressure);
 			gateB.setPressure( pressure );
+			
 			double request = calculateRequest(pressure);
 			if( pressure > 0 ) {
-				waterContent += aPiece.pullWater(pressure);
+				waterContent += aPiece.pullWater(request);
 			} else {
-				waterContent += bPiece.pullWater(pressure);
+				waterContent += bPiece.pullWater(request);
 			}
 		}
 		
 		if( bPiece != null && bPiece.isTicked() ) {
 			double pressure = gateB.getAttachedGate().getPressure();
-			gateA.setPressure( gateB.getAttachedGate().getPressure() );
-
+			gateA.setPressure( pressure );
+			gateB.setPressure(pressure);
+			
+			double request = calculateRequest(pressure);
+			if( pressure > 0 ) {
+				waterContent += bPiece.pullWater(request);
+			} else {
+				waterContent += aPiece.pullWater(request);
+			}
 		}
 		
 		this.ticked = true;
 	}
 
 	double calculateRequest( double pressure ) {
-		double abs = Math.abs(pressure);
+		double absPressure = Math.abs(pressure);
 		
 		double waterRequest = 0 ;
-		if( pressure > ( CAPACITY - waterContent ) ) {
+		if( absPressure > ( CAPACITY - waterContent ) ) {
 			waterRequest = CAPACITY - waterContent ;
 		} else {
-			waterRequest = pressure; 
+			waterRequest = absPressure; 
 		}
 		return waterRequest ;
 	}

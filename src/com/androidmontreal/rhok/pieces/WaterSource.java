@@ -1,8 +1,6 @@
 package com.androidmontreal.rhok.pieces;
 
-import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.List;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
@@ -11,10 +9,20 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
  */
 public class WaterSource implements Piece {
 
+	private final Sprite sprite;
+
+	private double waterContent;
+	
 	private Gate sourceExit;
 	private Boolean ticked;
 	
-	private Point position = new Point(0,0);  // DEFAULT
+	private Point position = null ;  // DEFAULT
+
+	
+	public WaterSource(Sprite sprite ) {
+		this.sprite = sprite;
+		this.waterContent = Double.MAX_VALUE ; 
+	}
 	
 	@Override
 	public Hashtable<Direction, Gate> getGates() {
@@ -33,9 +41,8 @@ public class WaterSource implements Piece {
 
 	@Override
 	public void tick(long timedelta) {
-		// TODO Auto-generated method stub
-		
-		this.ticked = true;
+		// Nothing to do..
+		this.ticked = true;  
 	}
 
 	@Override
@@ -50,25 +57,31 @@ public class WaterSource implements Piece {
 
 	@Override
 	public Sprite getCurrentSprite() {
-		// TODO Auto-generated method stub
-		return null;
+		return sprite;
 	}
 
 	@Override
 	public double getWater() {
-		// TODO Auto-generated method stub
-		return 0;
+		return Double.MAX_VALUE ;
 	}
 
 	@Override
 	public void setWater(double volume) {
-		// TODO Auto-generated method stub
-		
+		this.waterContent = volume ;
 	}
 	
 	@Override
 	public double pullWater(double volume) {
-		return volume; // for now, the water source is unlimited
+		double retVal = 0 ;
+		if( volume > waterContent ) {
+			retVal = waterContent ;
+			waterContent = 0 ;
+		} else {
+			retVal = volume ;
+			waterContent -= volume ;
+		}
+		
+		return retVal ;
 	}
 
 }
