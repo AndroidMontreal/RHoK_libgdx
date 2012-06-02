@@ -1,12 +1,12 @@
 package com.androidmontreal.rhok;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.androidmontreal.rhok.pieces.Pipe;
 import com.androidmontreal.rhok.pieces.Piece;
-import com.androidmontreal.rhok.pieces.Pipe.PipeType;
-import com.androidmontreal.rhok.pieces.PipeGate;
+import com.androidmontreal.rhok.pieces.Pipe;
 import com.androidmontreal.rhok.pieces.factory.PieceType;
+import com.androidmontreal.rhok.pieces.factory.PipeFactory;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
@@ -22,7 +22,9 @@ public class WaterSupplyGame implements ApplicationListener {
 	private double steps;
 
 	List<PieceType> pipeTypes;
+	List<Piece> pieces;
 
+	
 	@Override
 	public void create() {
 
@@ -36,8 +38,10 @@ public class WaterSupplyGame implements ApplicationListener {
 	}
 
 	private void initializeSomePieces() {
+		pieces=new ArrayList<Piece>();
+		PipeFactory pipeFactory = PipeFactory.getInstance();
 		for (int i = 0; i < 10; i++) {
-			
+			pieces.add(pipeFactory.createPipe());
 		}
 	}
 
