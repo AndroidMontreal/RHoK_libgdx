@@ -70,11 +70,4 @@ public class WaterSource implements Piece {
 		return volume; // for now, the water source is unlimited
 	}
 
-	@Override
-	public double pullWater(double volume) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	
 }
