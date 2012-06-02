@@ -101,7 +101,7 @@ public class Pipe implements Piece {
 			if( pressure > 0 ) {
 				waterContent += aPiece.pullWater(pressure);
 			} else {
-				
+				waterContent += bPiece.pullWater(pressure);
 			}
 		}
 		
