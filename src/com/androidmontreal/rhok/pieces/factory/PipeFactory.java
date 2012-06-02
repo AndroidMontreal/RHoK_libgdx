@@ -17,16 +17,16 @@ public class PipeFactory
 	{
 		this.pieceType.add(type);
 	}
-	
-	public Pipe create(Point point)
-	{
-		PieceType type = this.getRandomPipeType();
-		
-		Pipe pipe = new Pipe(type.getSprite(), point);
-		pipe.setGates(type.getGates());
-		
-		return pipe;
-	}
+//	
+//	public Pipe create(Point point)
+//	{
+//		PieceType type = this.getRandomPipeType();
+////		
+////		Pipe pipe = new Pipe(type.getSprite(), point);
+////		pipe.setGates(type.getGates());
+////		
+//		return pipe;
+//	}
 	
 	private PieceType getRandomPipeType()
 	{
