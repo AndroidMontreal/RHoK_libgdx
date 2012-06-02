@@ -2,6 +2,7 @@ package com.androidmontreal.rhok;
 
 import java.util.List;
 
+import com.androidmontreal.rhok.pieces.Pipe;
 import com.androidmontreal.rhok.pieces.factory.PieceType;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -79,7 +80,7 @@ public class WaterSupplyGame implements ApplicationListener {
 	private void initializePipeTypes() {
 
 		PieceType pieceType;
-		for (PieceType.PipeType pipeType : PieceType.PipeType.values()) {
+		for (Pipe.PipeType pipeType : Pipe.PipeType.values()) {
 
 			switch (pipeType) {
 			case DOWN_LEFT:
