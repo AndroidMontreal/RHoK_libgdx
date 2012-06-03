@@ -17,7 +17,7 @@ public class SideboardController extends Group {
 	public SideboardController(Sideboard model, int x, int y, int width, int height ) {
 		super("Sideboard");
 		// Init view elements 
-		Texture texture = new Texture(Gdx.files.internal("water1.png")); // FIXME: Need a proper 'texture' here (just an alpha tint background maybe?)
+		Texture texture = new Texture(Gdx.files.internal("level_00.png")); // FIXME: Need a proper 'texture' here (just an alpha tint background maybe?)
 		background = new Sprite(texture);
 		background.setPosition(x, y);
 		background.setSize(width, height);

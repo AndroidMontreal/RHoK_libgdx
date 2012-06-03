@@ -20,6 +20,7 @@ import com.androidmontreal.rhok.renderers.BoardRenderer;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -56,13 +57,14 @@ public class WaterSupplyGame implements ApplicationListener {
 		
 		// pipesTable = new Pipe[TABLE_WIDTH][TABLE_HEIGHT];
 		
+		Texture.setEnforcePotImages(false);
 		board = new Board(TABLE_WIDTH, TABLE_HEIGHT);
 		boardController = new BoardController(board, new BoardRenderer(),dims);
 
 		System.out.println(dims.getWidth()+" "+ dims.getHeight());
 		sideboardStage = new Stage(dims.getWidth(), dims.getHeight(), false);
 //		sideboardStage.
-		SideboardController sideboardController = new SideboardController(new Sideboard(), 0, 0, 100, 100){
+		SideboardController sideboardController = new SideboardController(new Sideboard(), 0, 0, 512, 1024){
 			@Override
 			public boolean touchDown(float x, float y, int pointer) {
 				//System.out.println(String.format("sideboardcontroller Hit detect %f,%f", x, y));
@@ -70,7 +72,7 @@ public class WaterSupplyGame implements ApplicationListener {
 			}
 			
 		};
-//		sideboardStage.addActor(sideboardController);
+	//	sideboardStage.addActor(sideboardController);
 //		
 		// TEST
 //		PieceController pieceController = new PieceController(new Pump(Direction.RIGHT, 5)) {
@@ -92,9 +94,20 @@ public class WaterSupplyGame implements ApplicationListener {
 		pump.x=200;
 		pump.y=10;
 		
-		Image pipe = pieceImageFactory.buildPieceImage(new Pipe(Pipe.PipeType.HORIZONTAL, new Point(100, 100)));
+		Image pipe = pieceImageFactory.buildPieceImage(new Pipe(Pipe.PipeType.HORIZONTAL, new Point(128, 128)));
 		
 		sideboardStage.addActor(pipe);
+		
+		sideboardStage.addActor(pieceImageFactory.buildPieceImage(new Pipe(Pipe.PipeType.DOWN_LEFT,new Point(256, 128))));
+		sideboardStage.addActor(pieceImageFactory.buildPieceImage(new Pipe(Pipe.PipeType.DOWN_RIGHT,new Point(512, 256))));
+		sideboardStage.addActor(pieceImageFactory.buildPieceImage(new Pipe(Pipe.PipeType.DOWN_RIGHT,new Point(512, 256))));
+		sideboardStage.addActor(pieceImageFactory.buildPieceImage(new Pipe(Pipe.PipeType.TOP_LEFT,new Point(512, 256))));
+		sideboardStage.addActor(pieceImageFactory.buildPieceImage(new Pipe(Pipe.PipeType.TOP_RIGHT,new Point(512, 256))));
+		sideboardStage.addActor(pieceImageFactory.buildPieceImage(new Pipe(Pipe.PipeType.TOP_RIGHT,new Point(512, 256))));
+		sideboardStage.addActor(pieceImageFactory.buildPieceImage(new Pipe(Pipe.PipeType.TOP_RIGHT,new Point(512, 256))));
+		sideboardStage.addActor(pieceImageFactory.buildPieceImage(new Pipe(Pipe.PipeType.TOP_RIGHT,new Point(512, 256))));
+		sideboardStage.addActor(pieceImageFactory.buildPieceImage(new Pipe(Pipe.PipeType.VERTICAL,new Point(512, 256))));
+		sideboardStage.addActor(pieceImageFactory.buildPieceImage(new Pipe(Pipe.PipeType.VERTICAL,new Point(512, 256))));
 		
 		Gdx.input.setInputProcessor(sideboardStage);
 		

@@ -26,9 +26,9 @@ public class BoardController extends Actor {
 		this.renderer = renderer;
 		
 		// TODO: Remove mock stuff.
-		mockPipe = new Pipe(PipeType.DOWN_LEFT, new Point(dims.getWidth()/2, dims.getHeight()/2));
-		PipeRenderer pipeRenderer = new PipeRenderer(mockPipe);
-		this.renderer.addPieceRenderer(pipeRenderer);
+//		mockPipe = new Pipe(PipeType.DOWN_LEFT, new Point(dims.getWidth()/2, dims.getHeight()/2));
+//		PipeRenderer pipeRenderer = new PipeRenderer(mockPipe);
+//		this.renderer.addPieceRenderer(pipeRenderer);
 		
 	}
 	
