@@ -3,9 +3,6 @@ package com.androidmontreal.rhok;
 import java.util.List;
 
 import com.androidmontreal.rhok.pieces.Pipe;
-import com.androidmontreal.rhok.pieces.Piece;
-import com.androidmontreal.rhok.pieces.Pipe.PipeType;
-import com.androidmontreal.rhok.pieces.PipeGate;
 import com.androidmontreal.rhok.pieces.factory.PieceType;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
