@@ -39,7 +39,7 @@ public class SideboardController extends Group {
 
 	@Override
 	public Actor hit(float x, float y) {
-		// TODO Auto-generated method stub
+		System.out.println("sideBoardController hited at : "+x+";"+y);
 		return null;
 	}
 
