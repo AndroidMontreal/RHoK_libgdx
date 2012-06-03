@@ -25,9 +25,6 @@ public class Pipe implements Piece {
 	private Boolean ticked;	
 	private double waterContent = 0.0d;
 
-	private Sprite sprite;
-
-
 	public Pipe(PipeType type, Point position){
 		this.type = type;
 		this.position = position;
@@ -144,13 +141,6 @@ public class Pipe implements Piece {
 	public PipeType getType() {
 		return type;
 	}
-
-
-	@Override
-	public Sprite getCurrentSprite() {
-		return this.sprite;
-	}
-	
 
 	@Override
 	public double getWater()
