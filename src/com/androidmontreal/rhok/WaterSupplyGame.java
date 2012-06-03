@@ -12,7 +12,6 @@ import com.androidmontreal.rhok.pieces.factory.PipeFactory;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -27,7 +26,7 @@ public class WaterSupplyGame implements ApplicationListener {
 
 	private double steps;
 
-	List<Piece> pieces;
+	private List<Piece> pieces;
 	
 	private Hashtable<PipeType, Sprite> pipeSprites;
 	private Board board;
@@ -42,7 +41,7 @@ public class WaterSupplyGame implements ApplicationListener {
 		
 		board = new Board(TABLE_WIDTH, TABLE_HEIGHT, screenDims);
 
-		initializePipeTypes();
+		// initializePipeTypes();
 		// initializeSomePieces();
 		
 		
@@ -51,7 +50,7 @@ public class WaterSupplyGame implements ApplicationListener {
 	}
 	
 	private void initializeSomePieces() {
-					
+		
 		for (int x = 0; x < TABLE_WIDTH; x++) {
 			
 			for (int y = 0; y < TABLE_HEIGHT; y++) {
