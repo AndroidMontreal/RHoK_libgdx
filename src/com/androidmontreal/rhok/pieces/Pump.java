@@ -1,15 +1,12 @@
 package com.androidmontreal.rhok.pieces;
 
-import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.List;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class Pump implements Piece {
 
 	private final static double CAPACITY = 25 ;
-	private final Sprite sprite;
 	
 	Point point = null ;
 	
@@ -24,10 +21,9 @@ public class Pump implements Piece {
 	private Direction direction;
 
 	
-	public Pump( Direction outputDirection, double pressure, Sprite sprite ) {
+	public Pump( Direction outputDirection, double pressure ) {
 		
 		this.direction = outputDirection;
-		this.sprite = sprite;
 		
 		switch( outputDirection ) {
 			case UP :
@@ -88,11 +84,6 @@ public class Pump implements Piece {
 	@Override
 	public void resetTick() {
 		ticked = false ;
-	}
-
-	@Override
-	public Sprite getCurrentSprite() {
-		return sprite ;
 	}
 
 	@Override

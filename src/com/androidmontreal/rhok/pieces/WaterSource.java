@@ -2,15 +2,15 @@ package com.androidmontreal.rhok.pieces;
 
 import java.util.Hashtable;
 
+import javax.swing.text.Position;
+
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 /**
  * This piece represents a water source where the water needed by the monster village is available.
  */
 public class WaterSource implements Piece {
-
-	private final Sprite sprite;
-
+	
 	private double waterContent;
 	
 	private Gate sourceExit;
@@ -19,9 +19,9 @@ public class WaterSource implements Piece {
 	private Point position = null ;  // DEFAULT
 
 	
-	public WaterSource(Sprite sprite ) {
-		this.sprite = sprite;
-		this.waterContent = Double.MAX_VALUE ; 
+	public WaterSource(Point p) {
+		this.position = p;
+		this.waterContent = Double.MAX_VALUE ;
 	}
 	
 	@Override
@@ -53,11 +53,6 @@ public class WaterSource implements Piece {
 	@Override
 	public void resetTick() {
 		this.ticked = false;
-	}
-
-	@Override
-	public Sprite getCurrentSprite() {
-		return sprite;
 	}
 
 	@Override

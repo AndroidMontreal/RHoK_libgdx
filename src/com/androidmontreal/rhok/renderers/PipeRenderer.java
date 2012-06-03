@@ -68,10 +68,12 @@ public class PipeRenderer implements IRenderer {
 		
 		SpriteBatch batch = new SpriteBatch();
 		
+		batch.begin();
 		for (Sprite s : sprites) {
 			s.setPosition(p.getPosition().getX(),p.getPosition().getY());
 			s.draw(batch);
 		}
+		batch.end();
 										
 	}
 
