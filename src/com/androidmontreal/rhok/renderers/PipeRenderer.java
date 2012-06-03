@@ -1,4 +1,4 @@
-package com.androidmontreal.rhok.pieces.renderer;
+package com.androidmontreal.rhok.renderers;
 
 import java.util.ArrayList;
 

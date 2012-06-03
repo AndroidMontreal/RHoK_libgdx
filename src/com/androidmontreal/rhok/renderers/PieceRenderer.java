@@ -1,4 +1,4 @@
-package com.androidmontreal.rhok.pieces.renderer;
+package com.androidmontreal.rhok.renderers;
 
 import com.androidmontreal.rhok.pieces.Piece;
 import com.androidmontreal.rhok.pieces.Pipe;

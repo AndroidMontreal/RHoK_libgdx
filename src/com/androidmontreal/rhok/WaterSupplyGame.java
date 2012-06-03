@@ -10,7 +10,7 @@ import com.androidmontreal.rhok.pieces.Pipe.PipeType;
 import com.androidmontreal.rhok.pieces.Point;
 import com.androidmontreal.rhok.pieces.factory.PieceType;
 import com.androidmontreal.rhok.pieces.factory.PipeFactory;
-import com.androidmontreal.rhok.pieces.renderer.PipeRenderer;
+import com.androidmontreal.rhok.renderers.PipeRenderer;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
