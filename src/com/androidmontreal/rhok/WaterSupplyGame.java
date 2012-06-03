@@ -4,17 +4,27 @@ import java.util.Hashtable;
 import java.util.List;
 
 import com.androidmontreal.rhok.control.BoardController;
+import com.androidmontreal.rhok.control.PieceController;
+import com.androidmontreal.rhok.control.SideboardController;
 import com.androidmontreal.rhok.model.Board;
+import com.androidmontreal.rhok.model.Sideboard;
+import com.androidmontreal.rhok.pieces.Direction;
 import com.androidmontreal.rhok.pieces.Piece;
 import com.androidmontreal.rhok.pieces.Pipe;
 import com.androidmontreal.rhok.pieces.Pipe.PipeType;
 import com.androidmontreal.rhok.pieces.Point;
+import com.androidmontreal.rhok.pieces.Pump;
 import com.androidmontreal.rhok.pieces.factory.PipeFactory;
 import com.androidmontreal.rhok.renderers.BoardRenderer;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class WaterSupplyGame implements ApplicationListener {
 
@@ -32,18 +42,47 @@ public class WaterSupplyGame implements ApplicationListener {
 	private Hashtable<PipeType, Sprite> pipeSprites;
 	private Board board;
 	private BoardController boardController;
+	private Stage sideboardStage;
+	private Group group ;
 
 	
 	
 	@Override
 	public void create() {
 		
-		ScreenDims screenDims = new ScreenDims();
+		ScreenDims dims = new ScreenDims();
 		
 		// pipesTable = new Pipe[TABLE_WIDTH][TABLE_HEIGHT];
 		
 		board = new Board(TABLE_WIDTH, TABLE_HEIGHT);
-		boardController = new BoardController(board, new BoardRenderer(),screenDims);
+		boardController = new BoardController(board, new BoardRenderer(),dims);
+
+		sideboardStage = new Stage(dims.getWidth(), dims.getHeight(), false);
+//		sideboardStage.
+		SideboardController sideboardController = new SideboardController(new Sideboard(), 0, 0, 100, 100){
+			@Override
+			public boolean touchDown(float x, float y, int pointer) {
+				System.out.println(String.format("sideboardcontroller Hit detect %f,%f", x, y));
+				return super.touchDown(x, y, pointer);
+			}
+			
+		};
+		sideboardStage.addActor(sideboardController);
+		
+		// TEST
+		PieceController pieceController = new PieceController(new Pump(Direction.RIGHT, 5)) {
+			@Override
+			public boolean touchDown(float x, float y, int pointer) {
+				System.out.println(String.format("piececontroller Hit detect %f,%f", x, y));
+				return true;
+			}
+		};
+		pieceController.touchable = true ;
+		
+		sideboardController.addActor(pieceController);
+		// relative to parent here...
+		pieceController.setViewPosition(50,10);
+		
 		
 		// For each new piece.
 		// new PieceRenderer(p);
@@ -68,7 +107,7 @@ public class WaterSupplyGame implements ApplicationListener {
 
 	@Override
 	public void resize(int width, int height) {
-		System.out.println(String.format("%dx,%dy", width,height));
+		System.out.println(String.format("resized: %dx,%dy", width,height));
 
 	}
 
@@ -83,7 +122,13 @@ public class WaterSupplyGame implements ApplicationListener {
 		 *  TOUCH EVENT
 		 */
 		if(Gdx.input.isTouched()){
-			System.out.println("Screen is touch at "+Gdx.input.getX()+";"+Gdx.input.getY());
+			Vector2 point = new Vector2();
+            sideboardStage.toStageCoordinates(Gdx.input.getX(), Gdx.input.getY(), point);
+            Actor actor = sideboardStage.hit(point.x, point.y);
+            System.out.println("Screen is touch at "+Gdx.input.getX()+";"+Gdx.input.getY());
+            
+
+            /*
 			int x = Gdx.input.getX();
 			int y = Gdx.input.getY();
 			Piece touchedPiece = boardController.findPiece(x, y);
@@ -91,7 +136,10 @@ public class WaterSupplyGame implements ApplicationListener {
 			position.setX(x);
 			position.setY(y);
 			boardController.addPiece(touchedPiece, Gdx.input.getX(), Gdx.input.getY());
+			*/
 		}
+		
+		sideboardStage.draw();
 		
 		boardController.render() ;
 		

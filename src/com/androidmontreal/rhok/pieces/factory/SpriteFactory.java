@@ -2,12 +2,17 @@ package com.androidmontreal.rhok.pieces.factory;
 
 import java.util.Hashtable;
 
+import com.androidmontreal.rhok.pieces.Piece;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class SpriteFactory {
+	
+	class SpriteKey {
+		Class<Piece> clazz ;
+	}
 	
 	private AssetManager am;
 	
