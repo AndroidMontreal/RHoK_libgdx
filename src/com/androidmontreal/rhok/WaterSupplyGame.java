@@ -8,9 +8,7 @@ import com.androidmontreal.rhok.pieces.Piece;
 import com.androidmontreal.rhok.pieces.Pipe;
 import com.androidmontreal.rhok.pieces.Pipe.PipeType;
 import com.androidmontreal.rhok.pieces.Point;
-import com.androidmontreal.rhok.pieces.factory.PieceType;
 import com.androidmontreal.rhok.pieces.factory.PipeFactory;
-import com.androidmontreal.rhok.pieces.renderer.PipeRenderer;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
@@ -37,16 +35,17 @@ public class WaterSupplyGame implements ApplicationListener {
 	
 	@Override
 	public void create() {
+		
 		ScreenDims screenDims = new ScreenDims();
 		
-		pipesTable = new Pipe[TABLE_WIDTH][TABLE_HEIGHT];
+		// pipesTable = new Pipe[TABLE_WIDTH][TABLE_HEIGHT];
 		
 		board = new Board(TABLE_WIDTH, TABLE_HEIGHT, screenDims);
 
 		initializePipeTypes();
-		initializeSomePieces();
+		// initializeSomePieces();
 		
-	
+		
 		
 		batch = new SpriteBatch();
 	}
@@ -130,51 +129,6 @@ public class WaterSupplyGame implements ApplicationListener {
 
 	}
 	
-	private void initializePipeTypes() {
 
-		pipeSprites = new Hashtable<Pipe.PipeType, Sprite>();
-		
-		Sprite sprite;
-		
-		for (Pipe.PipeType pipeType : Pipe.PipeType.values()) {
-
-			switch (pipeType) {
-			case DOWN_LEFT:
-				sprite = new Sprite(new Texture(Gdx.files.internal("DownLeft.png")));
-				break;
-			case DOWN_RIGHT:
-				sprite =new Sprite(new Texture(Gdx.files.internal("DownRight.png")));
-				break;
-
-			case TOP_LEFT:
-				sprite =new Sprite(new Texture(Gdx.files.internal("TopLeft.png")));
-				break;
-
-			case TOP_RIGHT:
-				sprite =new Sprite(new Texture(Gdx.files.internal("TopRight.png")));
-				break;
-
-			case HORIZONTAL:
-				sprite =new Sprite(new Texture(Gdx.files.internal("HorizontalPipe.png")));
-				break;
-
-			case VERTICAL:
-				sprite =new Sprite(new Texture(Gdx.files.internal("VerticalPipe.png")));
-				break;
-				
-			case BLANK:
-				sprite =new Sprite(new Texture(Gdx.files.internal("blank.png")));
-				break;
-
-			default:
-				sprite = null;
-				break;
-			}
-			
-			if(sprite!=null){
-				pipeSprites.put(pipeType, sprite);
-			}
-		}
-	}
 
 }
