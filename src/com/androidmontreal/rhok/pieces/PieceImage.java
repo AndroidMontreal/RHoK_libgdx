@@ -35,7 +35,10 @@ public class PieceImage extends Image{
 	@Override
 	public void touchUp(float x, float y, int pointer) {
 		System.out.println(String.format("pieceimage touchUp detect %f,%f", x, y));
-		
+	
+		this.x = (float) (Math.floor((this.x+64)/128.0) * 128.0);
+		//this.x=  this.x %50;
+		this.y = (float) (Math.floor((this.y+64)/128.0) * 128.0);
 	}
 	
 	@Override
