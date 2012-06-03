@@ -79,6 +79,21 @@ public class WaterSupplyGame implements ApplicationListener {
 
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT); // This cryptic line clears
 													// the screen.					
+		
+		/**
+		 *  TOUCH EVENT
+		 */
+		if(Gdx.input.isTouched()){
+			System.out.println("Screen is touch at "+Gdx.input.getX()+";"+Gdx.input.getY());
+			Piece touchedPiece = board.findPiece(Gdx.input.getX(), Gdx.input.getY());
+			Point position = touchedPiece.getPosition();
+			position.getX();
+			position.getY();
+			board.addPiece(touchedPiece, Gdx.input.getX(), Gdx.input.getY());
+		}
+		
+		
+		
 		batch.begin();
 				
 		int spacing = 22;
@@ -98,13 +113,6 @@ public class WaterSupplyGame implements ApplicationListener {
 			} 		
 		}
 		
-		/**
-		 *  TOUCH EVENT
-		 */
-		if(Gdx.input.isTouched()){
-			System.out.println("Screen is touch at "+Gdx.input.getX()+";"+Gdx.input.getY());
-			Piece touchedPiece = board.findPiece(Gdx.input.getX(), Gdx.input.getY());
-		}
 		
 		batch.end();
 	}
