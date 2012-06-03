@@ -1,9 +1,19 @@
 package com.androidmontreal.rhok;
 
+import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
+<<<<<<< HEAD
 import com.androidmontreal.rhok.pieces.Pipe;
+=======
+import com.androidmontreal.rhok.pieces.Piece;
+import com.androidmontreal.rhok.pieces.Pipe;
+import com.androidmontreal.rhok.pieces.Pipe.PipeType;
+import com.androidmontreal.rhok.pieces.Point;
+>>>>>>> c86c976025e01ec5d47931f8fd0f86654e2510d3
 import com.androidmontreal.rhok.pieces.factory.PieceType;
+import com.androidmontreal.rhok.pieces.factory.PipeFactory;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
@@ -13,22 +23,45 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class WaterSupplyGame implements ApplicationListener {
 
+	private static final int TABLE_HEIGHT = 6;
+	private static final int TABLE_WIDTH = 5;
+	private Pipe[][] pipesTable;
+	
 	private SpriteBatch batch;
 	private Sprite sprite;
 
 	private double steps;
 
 	List<PieceType> pipeTypes;
+	List<Piece> pieces;
+	private Hashtable<PipeType, Sprite> pipeSprites;
 
+	
 	@Override
 	public void create() {
+		
+		pipesTable = new Pipe[TABLE_WIDTH][TABLE_HEIGHT];
 
 		initializePipeTypes();
-
-		Art.load();
-		sprite = new Sprite(Art.texture);
+		
+		initializeSomePieces();
+		
+	
+		
 		batch = new SpriteBatch();
 	}
+	
+	private void initializeSomePieces() {
+					
+		for (int x = 0; x < TABLE_WIDTH; x++) {
+			
+			for (int y = 0; y < TABLE_HEIGHT; y++) {
+				pipesTable[x][y] = PipeFactory.getInstance().createPipe(PipeType.DOWN_LEFT, new Point(x, y));
+			} 		
+		}
+		
+	}
+
 
 	@Override
 	public void resize(int width, int height) {
@@ -41,21 +74,26 @@ public class WaterSupplyGame implements ApplicationListener {
 		steps += 0.1;
 
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT); // This cryptic line clears
-													// the screen.
+													// the screen.					
 		batch.begin();
+				
 		int spacing = 22;
-		int waveX = (int) (Math.cos(steps) * 6d);
-		int waveY = (int) (Math.sin(steps) * 6d);
-		for (int i = 0; i < 10; i++) {
-			for (int j = 0; j < 10; j++) {
-				int x = (j + 1) * spacing;
-				int y = (i + 1) * spacing;
-				sprite.setPosition(x + waveX, y + waveY);
-				sprite.setRotation((float) (steps * 15));
-				sprite.draw(batch);
-				// batch.draw(texture, x+waveX, y+waveY );
-			}
+		
+		for (int x = 0; x < TABLE_WIDTH; x++) {			
+			for (int y = 0; y < TABLE_HEIGHT; y++) {
+				
+				Pipe p = pipesTable[x][y];
+				
+				Sprite s = pipeSprites.get(p.getType());		
+				int displayX = (x + 1) * spacing;
+				int displayY = (y + 1) * spacing;
+				
+				s.setPosition(displayX, displayY);
+				s.draw(batch);
+								
+			} 		
 		}
+					
 		batch.end();
 	}
 
@@ -76,50 +114,53 @@ public class WaterSupplyGame implements ApplicationListener {
 		// TODO Auto-generated method stub
 
 	}
+	
 
 	private void initializePipeTypes() {
 
-		PieceType pieceType;
+		pipeSprites = new Hashtable<Pipe.PipeType, Sprite>();
+		
+		Sprite sprite;
+		
 		for (Pipe.PipeType pipeType : Pipe.PipeType.values()) {
 
 			switch (pipeType) {
 			case DOWN_LEFT:
-				pieceType = new PieceType(new Sprite(new Texture(
-						Gdx.files.internal("DownLeft.png"))));
+				sprite = new Sprite(new Texture(Gdx.files.internal("DownLeft.png")));
 				break;
 			case DOWN_RIGHT:
-				pieceType = new PieceType(new Sprite(new Texture(
-						Gdx.files.internal("DownRight.png"))));
+				sprite =new Sprite(new Texture(Gdx.files.internal("DownRight.png")));
 				break;
 
 			case TOP_LEFT:
-				pieceType = new PieceType(new Sprite(new Texture(
-						Gdx.files.internal("TopLeft.png"))));
+				sprite =new Sprite(new Texture(Gdx.files.internal("TopLeft.png")));
 				break;
 
 			case TOP_RIGHT:
-				pieceType = new PieceType(new Sprite(new Texture(
-						Gdx.files.internal("TopRight.png"))));
+				sprite =new Sprite(new Texture(Gdx.files.internal("TopRight.png")));
 				break;
 
 			case HORIZONTAL:
-				pieceType = new PieceType(new Sprite(new Texture(
-						Gdx.files.internal("HorizontalPipe.png"))));
+				sprite =new Sprite(new Texture(Gdx.files.internal("HorizontalPipe.png")));
 				break;
 
 			case VERTICAL:
-				pieceType = new PieceType(new Sprite(new Texture(
-						Gdx.files.internal("VerticalPipe.png"))));
+				sprite =new Sprite(new Texture(Gdx.files.internal("VerticalPipe.png")));
+				break;
+				
+			case BLANK:
+				sprite =new Sprite(new Texture(Gdx.files.internal("blank.png")));
 				break;
 
 			default:
-				pieceType = null;
+				sprite = null;
 				break;
 			}
 			
-			if(pieceType!=null){
-				pipeTypes.add(pieceType);
+			if(sprite!=null){
+				pipeSprites.put(pipeType, sprite);
 			}
 		}
 	}
+
 }
