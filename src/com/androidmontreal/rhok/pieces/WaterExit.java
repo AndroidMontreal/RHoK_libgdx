@@ -14,9 +14,7 @@ public class WaterExit implements Piece {
 	private Gate gateA;
 	private Boolean ticked = false;
 	private Point position;
-
-	private Sprite sprite;
-
+	
 	public WaterExit() {
 	} 
 	
@@ -66,11 +64,6 @@ public class WaterExit implements Piece {
 	@Override
 	public void resetTick() {
 		this.ticked = false;
-	}
-
-	@Override
-	public Sprite getCurrentSprite() {
-		return sprite;
 	}
 
 	@Override

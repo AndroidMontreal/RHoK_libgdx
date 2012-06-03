@@ -16,8 +16,6 @@ public interface Piece {
 	boolean isTicked();
 	void resetTick();
 	
-	Sprite getCurrentSprite();
-	
 	double getWater();
 	void setWater(double volume);
 	

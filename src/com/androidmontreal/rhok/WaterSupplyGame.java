@@ -8,8 +8,10 @@ import com.androidmontreal.rhok.pieces.Piece;
 import com.androidmontreal.rhok.pieces.Pipe;
 import com.androidmontreal.rhok.pieces.Pipe.PipeType;
 import com.androidmontreal.rhok.pieces.Point;
+import com.androidmontreal.rhok.pieces.WaterSource;
 import com.androidmontreal.rhok.pieces.factory.PieceType;
 import com.androidmontreal.rhok.pieces.factory.PipeFactory;
+import com.androidmontreal.rhok.renderers.PieceRenderer;
 import com.androidmontreal.rhok.renderers.PipeRenderer;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -92,24 +94,12 @@ public class WaterSupplyGame implements ApplicationListener {
 		
 		
 		
-		batch.begin();
-				
-		int spacing = 22;
+		//Test water animation
+		WaterSource ws = new WaterSource(new Point(5, 5));		
+		PieceRenderer pr = new PieceRenderer(ws);
+		pr.render();
 		
-		for (int x = 0; x < TABLE_WIDTH; x++) {			
-			for (int y = 0; y < TABLE_HEIGHT; y++) {
-				
-				Pipe p = pipesTable[x][y];
-			
-				int displayX = (x + 1) * spacing;
-				int displayY = (y + 1) * spacing;					
-							
-																
-			} 		
-		}
-		
-		
-		batch.end();
+					
 	}
 
 	@Override

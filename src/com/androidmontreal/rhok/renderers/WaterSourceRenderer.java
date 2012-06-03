@@ -3,13 +3,14 @@ package com.androidmontreal.rhok.renderers;
 import java.util.ArrayList;
 
 import com.androidmontreal.rhok.pieces.Pump;
+import com.androidmontreal.rhok.pieces.WaterSource;
 import com.androidmontreal.rhok.pieces.factory.SpriteFactory;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class PumpRenderer implements IRenderer {
+public class WaterSourceRenderer implements IRenderer {
 
-	private Pump p;
+	private WaterSource w;
 	private ArrayList<Sprite> sprites;
 	private SpriteFactory sf;
 
@@ -17,9 +18,9 @@ public class PumpRenderer implements IRenderer {
 	 * 
 	 * @param p
 	 */
-	public PumpRenderer(Pump p) {
+	public WaterSourceRenderer(WaterSource w) {
 
-		this.p = p;
+		this.w = w;
 		sprites = new ArrayList<Sprite>();
 		sf = SpriteFactory.getInstance();
 
@@ -33,16 +34,17 @@ public class PumpRenderer implements IRenderer {
 	 * Create the first layer
 	 */
 	private void createBaseLayer() {
-		
-		switch (p.getDirection()) {		
-			case UP: sprites.add(sf.createSprite(SpriteFactory.PUMP_TOP)); break;
-			case DOWN: sprites.add(sf.createSprite(SpriteFactory.PUMP_DOWN)); break;
-			case RIGHT: sprites.add(sf.createSprite(SpriteFactory.PUMP_LEFT)); break;
-			case LEFT: sprites.add(sf.createSprite(SpriteFactory.PUMP_RIGHT)); break;
-		}
+		sprites.add(sf.createSprite(SpriteFactory.WATER_SOURCE));
 	}
 	
 	private void createComplexLayer() {
+		
+		if(System.currentTimeMillis()%1000>500){
+			sprites.add(sf.createSprite(SpriteFactory.WATER_SOURCE_1));
+		}else{
+			sprites.add(sf.createSprite(SpriteFactory.WATER_SOURCE_2));
+		}
+		
 		// TODO Water related rendering go here
 	}
 
@@ -54,7 +56,10 @@ public class PumpRenderer implements IRenderer {
 		
 		batch.begin();
 		for (Sprite s : sprites) {
-			s.setPosition(p.getPosition().getX(),p.getPosition().getY());
+			s.setPosition(w.getPosition().getX(),w.getPosition().getY());
+			
+			
+			//s.setRotation(d);
 			s.draw(batch);
 		}
 		batch.end();

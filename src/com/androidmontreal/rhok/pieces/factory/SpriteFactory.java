@@ -18,6 +18,8 @@ public class SpriteFactory {
 	public static String PUMP_LEFT = "HorizontalPump.png";
 	public static String PUMP_RIGHT = "HorizontalPump.png";
 	public static String WATER_SOURCE = "Source.png";
+	public static String WATER_SOURCE_1 = "water1.png";
+	public static String WATER_SOURCE_2 = "water2.png";
 	public static String WATER_EXIT = "Exit.png";
 	public static String PIPE_TOP_LEFT = "TopLeft.png";
 	public static String PIPE_TOP_RIGHT = "TopRight.png";
@@ -34,6 +36,8 @@ public class SpriteFactory {
 			PUMP_LEFT,
 			PUMP_RIGHT,
 			WATER_SOURCE,
+			WATER_SOURCE_1,
+			WATER_SOURCE_2,
 			WATER_EXIT,
 			PIPE_TOP_LEFT,
 			PIPE_TOP_RIGHT,
