@@ -3,6 +3,7 @@ package com.androidmontreal.rhok;
 import java.util.Hashtable;
 import java.util.List;
 
+import com.androidmontreal.rhok.board.Board;
 import com.androidmontreal.rhok.pieces.Piece;
 import com.androidmontreal.rhok.pieces.Pipe;
 import com.androidmontreal.rhok.pieces.Pipe.PipeType;
@@ -29,13 +30,17 @@ public class WaterSupplyGame implements ApplicationListener {
 
 	List<PieceType> pipeTypes;
 	List<Piece> pieces;
+	
 	private Hashtable<PipeType, Sprite> pipeSprites;
+	private Board board;
 
 	
 	@Override
 	public void create() {
 		
 		pipesTable = new Pipe[TABLE_WIDTH][TABLE_HEIGHT];
+		
+		board = new Board(TABLE_WIDTH, TABLE_HEIGHT);
 
 		initializePipeTypes();
 		
@@ -51,7 +56,9 @@ public class WaterSupplyGame implements ApplicationListener {
 		for (int x = 0; x < TABLE_WIDTH; x++) {
 			
 			for (int y = 0; y < TABLE_HEIGHT; y++) {
+				// TODO: Get rid when we have board working.
 				pipesTable[x][y] = PipeFactory.getInstance().createPipe(PipeType.DOWN_LEFT, new Point(x, y));
+				// [EC] I'm not bothering with this, I'll give the board a mock constructor or somethign instead. 
 			} 		
 		}
 		
@@ -60,6 +67,7 @@ public class WaterSupplyGame implements ApplicationListener {
 
 	@Override
 	public void resize(int width, int height) {
+		System.out.println(String.format("%dx,%dy", width,height));
 		// TODO Auto-generated method stub
 
 	}
@@ -110,7 +118,6 @@ public class WaterSupplyGame implements ApplicationListener {
 
 	}
 	
-
 	private void initializePipeTypes() {
 
 		pipeSprites = new Hashtable<Pipe.PipeType, Sprite>();
