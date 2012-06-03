@@ -16,6 +16,7 @@ import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Logger;
 
 public class WaterSupplyGame implements ApplicationListener {
 
@@ -95,7 +96,15 @@ public class WaterSupplyGame implements ApplicationListener {
 								
 			} 		
 		}
-					
+		
+		/**
+		 *  TOUCH EVENT
+		 */
+		if(Gdx.input.isTouched()){
+			System.out.println("Screen is touch at "+Gdx.input.getX()+";"+Gdx.input.getY());
+			Piece touchedPiece = board.findPiece(Gdx.input.getX(), Gdx.input.getY());
+		}
+		
 		batch.end();
 	}
 
