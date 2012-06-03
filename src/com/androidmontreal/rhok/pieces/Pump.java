@@ -21,10 +21,12 @@ public class Pump implements Piece {
 	double outputPressure ;
 
 	private double waterContent;
+	private Direction direction;
 
 	
 	public Pump( Direction outputDirection, double pressure, Sprite sprite ) {
 		
+		this.direction = outputDirection;
 		this.sprite = sprite;
 		
 		switch( outputDirection ) {
@@ -117,4 +119,8 @@ public class Pump implements Piece {
 		return retVal ;
 	}
 
+	public Direction getDirection() {
+		return direction;
+	}
+	
 }
