@@ -7,6 +7,9 @@ public class PieceImage extends Image{
 	
 	Piece piece;
 	
+	float touchx =0;
+	float touchy=0;
+	
 	public PieceImage(Texture texture, Piece piece){
 		super(texture);
 		this.piece = piece;
@@ -15,6 +18,9 @@ public class PieceImage extends Image{
 	@Override
 	public boolean touchDown(float x, float y, int pointer) {
 		System.out.println(String.format("pieceimage touchdown detect %f,%f", x, y));
+		touchx =x;
+		touchy =y;
+		
 		return true;
 	}
 	
@@ -26,9 +32,10 @@ public class PieceImage extends Image{
 	
 	@Override
 	public void touchDragged(float x, float y, int pointer) {
+		
 		System.out.println(String.format("pieceimage dragged detect %f,%f", x, y));
-		this.x = x;
-		this.y = y;
+		this.x += x-touchx;
+		this.y += y-touchy;
 	}
 
 }
