@@ -15,6 +15,7 @@ import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Logger;
 
 public class WaterSupplyGame implements ApplicationListener {
 
@@ -60,9 +61,8 @@ public class WaterSupplyGame implements ApplicationListener {
 
 	@Override
 	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
-
-	}
+		System.out.println("width "+width +" "+height);
+		}
 
 	@Override
 	public void render() {
@@ -88,7 +88,12 @@ public class WaterSupplyGame implements ApplicationListener {
 								
 			} 		
 		}
-					
+		
+		if(Gdx.input.isTouched()){
+			System.out.println("Screen is touch at "+Gdx.input.getX()+";"+Gdx.input.getY());
+			
+		}
+		
 		batch.end();
 	}
 
