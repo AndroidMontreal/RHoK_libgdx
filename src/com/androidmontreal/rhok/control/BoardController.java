@@ -8,8 +8,10 @@ import com.androidmontreal.rhok.pieces.Point;
 import com.androidmontreal.rhok.pieces.Pipe.PipeType;
 import com.androidmontreal.rhok.renderers.BoardRenderer;
 import com.androidmontreal.rhok.renderers.PipeRenderer;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 
-public class BoardController {
+public class BoardController extends Actor {
 
 	private final Board board;
 	private final BoardRenderer renderer;
@@ -36,6 +38,18 @@ public class BoardController {
 	
 	public Piece findPiece( int x, int y ) {
 		return mockPipe ;
+	}
+
+	@Override
+	public void draw(SpriteBatch batch, float parentAlpha) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Actor hit(float x, float y) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

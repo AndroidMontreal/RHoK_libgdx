@@ -3,13 +3,15 @@ package com.androidmontreal.rhok.pieces;
 import java.util.Hashtable;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 
 /**
  * This piece represents a pipe between two other pieces (pipes, water source,
  * pump, no piece)
  */
 
-public class Pipe implements Piece {
+public class Pipe extends Actor implements Piece {
 	
 	public enum PipeType{
 		TOP_LEFT, TOP_RIGHT, DOWN_RIGHT, DOWN_LEFT, HORIZONTAL, VERTICAL, BLANK;
@@ -166,6 +168,18 @@ public class Pipe implements Piece {
 		}
 		
 		return retVal ;
+	}
+
+	@Override
+	public void draw(SpriteBatch batch, float parentAlpha) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Actor hit(float x, float y) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

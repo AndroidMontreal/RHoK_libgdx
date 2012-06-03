@@ -9,6 +9,7 @@ public interface Piece {
 
 	Hashtable<Direction, Gate> getGates() ;
 	
+	
 	Point getPosition();
 	
 	// 
