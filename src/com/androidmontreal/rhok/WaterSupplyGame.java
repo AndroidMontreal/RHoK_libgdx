@@ -1,9 +1,9 @@
 package com.androidmontreal.rhok;
 
-import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
+import com.androidmontreal.rhok.board.Board;
 import com.androidmontreal.rhok.pieces.Piece;
 import com.androidmontreal.rhok.pieces.Pipe;
 import com.androidmontreal.rhok.pieces.Pipe.PipeType;
@@ -17,6 +17,7 @@ import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Logger;
 
 public class WaterSupplyGame implements ApplicationListener {
 
@@ -30,16 +31,20 @@ public class WaterSupplyGame implements ApplicationListener {
 	private double steps;
 
 	List<Piece> pieces;
+	
 	private Hashtable<PipeType, Sprite> pipeSprites;
+	private Board board;
 
 	
 	@Override
 	public void create() {
+		ScreenDims screenDims = new ScreenDims();
 		
 		pipesTable = new Pipe[TABLE_WIDTH][TABLE_HEIGHT];
+		
+		board = new Board(TABLE_WIDTH, TABLE_HEIGHT, screenDims);
 
 		initializePipeTypes();
-		
 		initializeSomePieces();
 		
 	
@@ -52,7 +57,9 @@ public class WaterSupplyGame implements ApplicationListener {
 		for (int x = 0; x < TABLE_WIDTH; x++) {
 			
 			for (int y = 0; y < TABLE_HEIGHT; y++) {
+				// TODO: Get rid when we have board working.
 				pipesTable[x][y] = PipeFactory.getInstance().createPipe(PipeType.DOWN_LEFT, new Point(x, y));
+				// [EC] I'm not bothering with this, I'll give the board a mock constructor or somethign instead. 
 			} 		
 		}
 		
@@ -61,7 +68,7 @@ public class WaterSupplyGame implements ApplicationListener {
 
 	@Override
 	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
+		System.out.println(String.format("%dx,%dy", width,height));
 
 	}
 
@@ -71,6 +78,21 @@ public class WaterSupplyGame implements ApplicationListener {
 
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT); // This cryptic line clears
 													// the screen.					
+		
+		/**
+		 *  TOUCH EVENT
+		 */
+		if(Gdx.input.isTouched()){
+			System.out.println("Screen is touch at "+Gdx.input.getX()+";"+Gdx.input.getY());
+			Piece touchedPiece = board.findPiece(Gdx.input.getX(), Gdx.input.getY());
+			Point position = touchedPiece.getPosition();
+			position.getX();
+			position.getY();
+			board.addPiece(touchedPiece, Gdx.input.getX(), Gdx.input.getY());
+		}
+		
+		
+		
 		batch.begin();
 				
 		int spacing = 22;
@@ -86,7 +108,8 @@ public class WaterSupplyGame implements ApplicationListener {
 																
 			} 		
 		}
-					
+		
+		
 		batch.end();
 	}
 
@@ -108,7 +131,6 @@ public class WaterSupplyGame implements ApplicationListener {
 
 	}
 	
-
 	private void initializePipeTypes() {
 
 		pipeSprites = new Hashtable<Pipe.PipeType, Sprite>();
