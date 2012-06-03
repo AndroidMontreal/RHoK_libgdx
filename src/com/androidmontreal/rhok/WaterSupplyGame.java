@@ -98,9 +98,12 @@ public class WaterSupplyGame implements ApplicationListener {
 			} 		
 		}
 		
+		/**
+		 *  TOUCH EVENT
+		 */
 		if(Gdx.input.isTouched()){
 			System.out.println("Screen is touch at "+Gdx.input.getX()+";"+Gdx.input.getY());
-			
+			Piece touchedPiece = board.findPiece(Gdx.input.getX(), Gdx.input.getY());
 		}
 		
 		batch.end();

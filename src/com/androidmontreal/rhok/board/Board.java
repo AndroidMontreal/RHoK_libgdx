@@ -30,6 +30,10 @@ public class Board {
 		boardPieces = new Piece[width][height];
 	}
 	
+	public void addPiece(Piece piece, int x, int y){
+		//TODO implements
+	}
+	
 	public void addPiece(Piece piece)
 	{
 		this.pieces.add(piece);
