@@ -37,13 +37,13 @@ public class WaterSupplyGame implements ApplicationListener {
 	
 	@Override
 	public void create() {
+		ScreenDims screenDims = new ScreenDims();
 		
 		pipesTable = new Pipe[TABLE_WIDTH][TABLE_HEIGHT];
 		
-		board = new Board(TABLE_WIDTH, TABLE_HEIGHT);
+		board = new Board(TABLE_WIDTH, TABLE_HEIGHT, screenDims);
 
 		initializePipeTypes();
-		
 		initializeSomePieces();
 		
 	
@@ -68,7 +68,6 @@ public class WaterSupplyGame implements ApplicationListener {
 	@Override
 	public void resize(int width, int height) {
 		System.out.println(String.format("%dx,%dy", width,height));
-		// TODO Auto-generated method stub
 
 	}
 
