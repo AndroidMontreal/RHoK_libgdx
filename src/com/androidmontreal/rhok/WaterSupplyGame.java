@@ -10,6 +10,7 @@ import com.androidmontreal.rhok.pieces.Pipe.PipeType;
 import com.androidmontreal.rhok.pieces.Point;
 import com.androidmontreal.rhok.pieces.factory.PieceType;
 import com.androidmontreal.rhok.pieces.factory.PipeFactory;
+import com.androidmontreal.rhok.pieces.renderer.PipeRenderer;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
@@ -28,7 +29,6 @@ public class WaterSupplyGame implements ApplicationListener {
 
 	private double steps;
 
-	List<PieceType> pipeTypes;
 	List<Piece> pieces;
 	private Hashtable<PipeType, Sprite> pipeSprites;
 
@@ -79,14 +79,11 @@ public class WaterSupplyGame implements ApplicationListener {
 			for (int y = 0; y < TABLE_HEIGHT; y++) {
 				
 				Pipe p = pipesTable[x][y];
-				
-				Sprite s = pipeSprites.get(p.getType());		
+			
 				int displayX = (x + 1) * spacing;
-				int displayY = (y + 1) * spacing;
-				
-				s.setPosition(displayX, displayY);
-				s.draw(batch);
-								
+				int displayY = (y + 1) * spacing;					
+							
+																
 			} 		
 		}
 					

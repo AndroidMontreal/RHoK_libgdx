@@ -12,12 +12,6 @@ public class PipeFactory {
 
 	private static PipeFactory instance;
 
-	private List<PieceType> pieceType = new ArrayList<PieceType>();
-
-	public void addPieceType(PieceType type) {
-		this.pieceType.add(type);
-	}
-
 	public Pipe createPipe() {
 		Pipe pipe = new Pipe(null, getRandomPipeType());
 		return pipe;
