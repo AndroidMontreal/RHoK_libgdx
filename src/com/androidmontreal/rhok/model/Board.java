@@ -1,4 +1,4 @@
-package com.androidmontreal.rhok.board;
+package com.androidmontreal.rhok.model;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,7 @@
-package com.androidmontreal.rhok.controllers;
+package com.androidmontreal.rhok.control;
 
 import com.androidmontreal.rhok.ScreenDims;
-import com.androidmontreal.rhok.board.Board;
+import com.androidmontreal.rhok.model.Board;
 import com.androidmontreal.rhok.pieces.Piece;
 import com.androidmontreal.rhok.pieces.Pipe;
 import com.androidmontreal.rhok.pieces.Point;
@@ -13,6 +13,10 @@ public class BoardController {
 
 	private final Board board;
 	private final BoardRenderer renderer;
+	public void render() {
+		renderer.render();
+	}
+
 	private Pipe mockPipe;
 
 	public BoardController(Board board, BoardRenderer renderer, ScreenDims dims ) {

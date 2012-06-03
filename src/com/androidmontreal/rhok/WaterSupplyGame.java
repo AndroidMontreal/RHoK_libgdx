@@ -3,15 +3,14 @@ package com.androidmontreal.rhok;
 import java.util.Hashtable;
 import java.util.List;
 
-import com.androidmontreal.rhok.board.Board;
-import com.androidmontreal.rhok.controllers.BoardController;
+import com.androidmontreal.rhok.control.BoardController;
+import com.androidmontreal.rhok.model.Board;
 import com.androidmontreal.rhok.pieces.Piece;
 import com.androidmontreal.rhok.pieces.Pipe;
 import com.androidmontreal.rhok.pieces.Pipe.PipeType;
 import com.androidmontreal.rhok.pieces.Point;
 import com.androidmontreal.rhok.pieces.factory.PipeFactory;
 import com.androidmontreal.rhok.renderers.BoardRenderer;
-import com.androidmontreal.rhok.renderers.PieceRenderer;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
@@ -24,8 +23,8 @@ public class WaterSupplyGame implements ApplicationListener {
 	private static final int TABLE_WIDTH = 5;
 	private Pipe[][] pipesTable;
 	
-	private SpriteBatch batch;
-	private Sprite sprite;
+//	private SpriteBatch batch;
+//	private Sprite sprite;
 
 	private double steps;
 
@@ -33,9 +32,9 @@ public class WaterSupplyGame implements ApplicationListener {
 	
 	private Hashtable<PipeType, Sprite> pipeSprites;
 	private Board board;
-	private BoardRenderer boardRenderer;
 	private BoardController boardController;
 
+	
 	
 	@Override
 	public void create() {
@@ -45,14 +44,13 @@ public class WaterSupplyGame implements ApplicationListener {
 		// pipesTable = new Pipe[TABLE_WIDTH][TABLE_HEIGHT];
 		
 		board = new Board(TABLE_WIDTH, TABLE_HEIGHT);
-		boardRenderer = new BoardRenderer();
-		boardController = new BoardController(board, boardRenderer,screenDims);
+		boardController = new BoardController(board, new BoardRenderer(),screenDims);
 		
 		// For each new piece.
 		// new PieceRenderer(p);
 		
 		// TODO: Remove this I think...
-		batch = new SpriteBatch();
+//		batch = new SpriteBatch();
 	}
 	
 	private void initializeSomePieces() {
@@ -93,32 +91,11 @@ public class WaterSupplyGame implements ApplicationListener {
 			Point position = touchedPiece.getPosition();
 			position.setX(x);
 			position.setY(y);
-//			position.getY();
 			boardController.addPiece(touchedPiece, Gdx.input.getX(), Gdx.input.getY());
 		}
 		
+		boardController.render() ;
 		
-		
-		batch.begin();
-	
-		boardRenderer.render() ;
-		
-//		int spacing = 22;
-		
-//		for (int x = 0; x < TABLE_WIDTH; x++) {			
-//			for (int y = 0; y < TABLE_HEIGHT; y++) {
-//				
-//				Pipe p = pipesTable[x][y];
-//			
-//				int displayX = (x + 1) * spacing;
-//				int displayY = (y + 1) * spacing;					
-//							
-//																
-//			} 		
-//		}
-//		
-		
-		batch.end();
 	}
 
 	@Override

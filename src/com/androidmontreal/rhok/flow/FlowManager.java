@@ -1,6 +1,6 @@
 package com.androidmontreal.rhok.flow;
 
-import com.androidmontreal.rhok.board.Board;
+import com.androidmontreal.rhok.model.Board;
 import com.androidmontreal.rhok.pieces.Gate;
 import com.androidmontreal.rhok.pieces.Piece;
 
