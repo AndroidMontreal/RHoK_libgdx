@@ -88,10 +88,14 @@ public class WaterSupplyGame implements ApplicationListener {
 		PieceImageFactory pieceImageFactory = new PieceImageFactory();
 		Image pump = pieceImageFactory.buildPieceImage(new Pump(Direction.RIGHT, 5));
 		pump.touchable=true;
-		
 		sideboardStage.addActor(pump);
 		pump.x=200;
 		pump.y=10;
+		
+		Image pipe = pieceImageFactory.buildPieceImage(new Pipe(Pipe.PipeType.HORIZONTAL, new Point(100, 100)));
+		
+		sideboardStage.addActor(pipe);
+		
 		Gdx.input.setInputProcessor(sideboardStage);
 		
 		// For each new piece.
