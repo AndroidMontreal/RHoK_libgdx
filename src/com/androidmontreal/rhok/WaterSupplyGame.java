@@ -42,7 +42,7 @@ public class WaterSupplyGame implements ApplicationListener {
 		
 		board = new Board(TABLE_WIDTH, TABLE_HEIGHT, screenDims);
 
-		initializePipeTypes();
+		//initializePipeTypes();
 		// initializeSomePieces();
 		
 		
