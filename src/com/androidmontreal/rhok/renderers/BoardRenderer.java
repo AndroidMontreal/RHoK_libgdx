@@ -1,15 +1,38 @@
 package com.androidmontreal.rhok.renderers;
 
-import com.androidmontreal.rhok.board.Board;
-import com.androidmontreal.rhok.pieces.Piece;
+import java.util.ArrayList;
+import java.util.List;
 
-public class BoardRenderer {
-
+/**
+ * <p>The board knows it's renderer... we should create a controller but no time!
+ *
+ */
+public class BoardRenderer implements IRenderer {
 	
-	void render( Board board ) {
-		Piece[][] boardPieces = board.getBoardPieces();
-		for( int i = 0 ; i < boardPieces.length ; i++ ) {
-			
+	private List<IRenderer> pieceRenderers = new ArrayList<IRenderer>();
+	
+	public BoardRenderer() {
+	}
+
+	public void addPieceRenderer(IRenderer renderer) {
+		pieceRenderers.add(renderer);
+	}
+
+	public void clear() {
+		pieceRenderers.clear();
+	}
+
+	public boolean contains(Object o) {
+		return pieceRenderers.contains(o);
+	}
+
+	public boolean remove(Object o) {
+		return pieceRenderers.remove(o);
+	}
+	
+	public void render(  ) {
+		for(IRenderer current : pieceRenderers) {
+			current.render();
 		}
 	}
 }
