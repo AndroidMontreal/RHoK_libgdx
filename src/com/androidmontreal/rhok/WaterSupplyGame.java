@@ -88,9 +88,11 @@ public class WaterSupplyGame implements ApplicationListener {
 		PieceImageFactory pieceImageFactory = new PieceImageFactory();
 		Image pump = pieceImageFactory.buildPieceImage(new Pump(Direction.RIGHT, 5));
 		pump.touchable=true;
+		
 		sideboardStage.addActor(pump);
 		pump.x=200;
 		pump.y=10;
+		Gdx.input.setInputProcessor(sideboardStage);
 		
 		// For each new piece.
 		// new PieceRenderer(p);
@@ -129,13 +131,16 @@ public class WaterSupplyGame implements ApplicationListener {
 		/**
 		 *  TOUCH EVENT
 		 */
-		if(Gdx.input.isTouched()){
+		if( Gdx.input.isTouched() ) {
 			Vector2 point = new Vector2();
+			
             sideboardStage.toStageCoordinates(Gdx.input.getX(), Gdx.input.getY(), point);
             Actor actor = sideboardStage.hit(point.x, point.y);
             
             if(actor !=null){
-            	System.out.println("actor != null");
+            	//System.out.println("actor != null");
+            	//actor.touchDown(point.x, point.y, 0);
+            	//acot.touchDown(point.x, point.y, actor,0);
             	if(actor instanceof PieceController){
             		System.out.println("POUPOUPOU");
             	}
