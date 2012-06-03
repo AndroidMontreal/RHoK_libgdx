@@ -1,17 +1,12 @@
 package com.androidmontreal.rhok;
 
-import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
-<<<<<<< HEAD
-import com.androidmontreal.rhok.pieces.Pipe;
-=======
 import com.androidmontreal.rhok.pieces.Piece;
 import com.androidmontreal.rhok.pieces.Pipe;
 import com.androidmontreal.rhok.pieces.Pipe.PipeType;
 import com.androidmontreal.rhok.pieces.Point;
->>>>>>> c86c976025e01ec5d47931f8fd0f86654e2510d3
 import com.androidmontreal.rhok.pieces.factory.PieceType;
 import com.androidmontreal.rhok.pieces.factory.PipeFactory;
 import com.badlogic.gdx.ApplicationListener;
