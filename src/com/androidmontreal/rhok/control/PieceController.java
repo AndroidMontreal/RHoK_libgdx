@@ -20,18 +20,22 @@ public class PieceController extends Actor {
 		this.sf = SpriteFactory.getInstance();
 		this.piece = piece;
 		this.initView();
+		// Initial values...
+		this.width = view.getWidth() ;
+		this.height = view.getHeight();
 	}
 
 	@Override
 	public void draw(SpriteBatch batch, float parentAlpha) {
+		view.setSize(width, height);
 		view.draw(batch);
 	}
 
 	@Override
 	public Actor hit(float x, float y) {
-		System.out.println(String.format("Hit detect %f,%f", x, y));
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println(String.format("pieceController Hit detect %f,%f", x, y));
+		return x > this.x && x < width+this.x && y > this.y && y < height + this.y ? this : null;
+//		return x > 0 && x < width && y > 0 && y < height ? this : null;
 	}
 	
 	// Set the sprite view to the right static image for the piece.
@@ -72,7 +76,7 @@ public class PieceController extends Actor {
 		} else if( this.piece instanceof WaterExit ) {
 			view = (sf.createSprite(SpriteFactory.WATER_EXIT));
 		} 
-		
+
 	}
 
 	/** 
@@ -81,6 +85,8 @@ public class PieceController extends Actor {
 	 * @param y
 	 */
 	public void setViewPosition(float x, float y) {
+		this.x = x ;
+		this.y = y ;
 		view.setPosition(x, y);
 	}
 

@@ -22,6 +22,9 @@ public class SideboardController extends Group {
 		background.setPosition(x, y);
 		background.setSize(width, height);
 		
+		this.width = width ;
+		this.height = height ;
+		
 		this.model = model;
 		
 		// TODO: Create piece views for contained pieces?
@@ -39,8 +42,8 @@ public class SideboardController extends Group {
 
 	@Override
 	public Actor hit(float x, float y) {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println(String.format("sideboardcontroller hit called %f,%f", x, y));
+		return x > this.x && x < width+this.x && y > this.y && y < height + this.y ? this : null;
 	}
 
 }

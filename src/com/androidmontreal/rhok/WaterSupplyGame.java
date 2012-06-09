@@ -18,9 +18,9 @@ import com.androidmontreal.rhok.pieces.factory.PipeFactory;
 import com.androidmontreal.rhok.renderers.BoardRenderer;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -44,6 +44,7 @@ public class WaterSupplyGame implements ApplicationListener {
 	private BoardController boardController;
 	private Stage sideboardStage;
 	private Group group ;
+	private InputMultiplexer inputMultiplexer;
 
 	
 	
@@ -58,24 +59,43 @@ public class WaterSupplyGame implements ApplicationListener {
 		boardController = new BoardController(board, new BoardRenderer(),dims);
 
 		sideboardStage = new Stage(dims.getWidth(), dims.getHeight(), false);
-//		sideboardStage.
-		SideboardController sideboardController = new SideboardController(new Sideboard(), 0, 0, 100, 100){
+
+		// Groupe d'acteurs
+		final SideboardController sideboardController = new SideboardController(new Sideboard(), 0, 0, dims.getWidth(), 100 ){
 			@Override
 			public boolean touchDown(float x, float y, int pointer) {
-				System.out.println(String.format("sideboardcontroller Hit detect %f,%f", x, y));
-				return super.touchDown(x, y, pointer);
+				// We've been touched.
+				System.out.println(String.format("sideboardcontroller touchDown called %f,%f", x, y));
+				// The call to super propagates the touch to the group's children.
+				return super.touchDown(x, y, pointer); 
 			}
-			
 		};
+		sideboardController.touchable= true ;
 		sideboardStage.addActor(sideboardController);
 		
 		// TEST
 		PieceController pieceController = new PieceController(new Pump(Direction.RIGHT, 5)) {
+			boolean dragged = false ;
+			
 			@Override
 			public boolean touchDown(float x, float y, int pointer) {
-				System.out.println(String.format("piececontroller Hit detect %f,%f", x, y));
+				System.out.println(String.format("piececontroller touchDown called %f,%f", x, y));
 				return true;
 			}
+			
+			@Override
+			public void touchDragged(float x, float y, int pointer) {
+				System.out.println(String.format("piece dragged %f,%f", x, y));
+				setViewPosition(x, y);
+			}
+						
+			@Override
+			public void touchUp(float x, float y, int pointer) {
+				System.out.println(String.format("piece released %f,%f", x, y));
+				setViewPosition(50, 10);
+//				sideboardController.removeActor(this); // this is allowed :)
+			}
+			
 		};
 		pieceController.touchable = true ;
 		
@@ -83,6 +103,9 @@ public class WaterSupplyGame implements ApplicationListener {
 		// relative to parent here...
 		pieceController.setViewPosition(50,10);
 		
+		// Register InputProcessor(s) [stages] 
+		inputMultiplexer = new InputMultiplexer(sideboardStage);
+		Gdx.input.setInputProcessor(inputMultiplexer);
 		
 		// For each new piece.
 		// new PieceRenderer(p);
@@ -123,8 +146,8 @@ public class WaterSupplyGame implements ApplicationListener {
 		 */
 		if(Gdx.input.isTouched()){
 			Vector2 point = new Vector2();
-            sideboardStage.toStageCoordinates(Gdx.input.getX(), Gdx.input.getY(), point);
-            Actor actor = sideboardStage.hit(point.x, point.y);
+//            sideboardStage.toStageCoordinates(Gdx.input.getX(), Gdx.input.getY(), point);
+//            Actor actor = sideboardStage.hit(point.x, point.y);
             System.out.println("Screen is touch at "+Gdx.input.getX()+";"+Gdx.input.getY());
             
 
